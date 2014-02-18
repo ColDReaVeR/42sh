@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/16 21:01:35 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/18 02:31:45 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/19 00:25:29 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -23,10 +23,8 @@ static void		ft_insert_script(char *to_insert, char *buf, int j);
 void			ft_replace_script(char **line, int i, int j)
 {
 	char		buf[10240];
-	char		*str;
 	char		quote;
 
-	str = NULL;
 	ft_bzero(buf, 10240);
 	quote = '\0';
 	while (line[0][i])
