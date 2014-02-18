@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/18 13:37:14 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/18 13:42:24 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/18 14:19:16 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -51,8 +51,8 @@ static int		ft_is_option(char *opt)
 		if (*opt != 'i')
 		{
 			ft_printf("%$%s%$", ERROR_CLR\
-					  , "usage: env [-i] [name=value ...] [utility [argument ...]]"
-					  ,TEXT_CLR);
+				, "usage: env [-i] [name=value ...] [utility [argument ...]]"
+				,TEXT_CLR);
 			return (0);
 		}
 		opt++;
@@ -93,7 +93,7 @@ static void		ft_simple_exec(char **av)
 	i = 1;
 	while (av[i])
 	{
-		new_av[k] = av[i];
+		new_av[k] = ft_strdup(av[i]);
 		i++;
 		k++;
 	}
@@ -120,7 +120,7 @@ static void		ft_exec_without_env(char **av)
 	i = 2;
 	while (av[i])
 	{
-		new_av[k] = av[i];
+		new_av[k] = ft_strdup(av[i]);
 		i++;
 		k++;
 	}
