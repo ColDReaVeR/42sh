@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/13 00:50:53 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/16 04:12:12 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/16 21:11:39 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -62,11 +62,12 @@ static void		ft_copy_alias(char *buf, char *string, int *i)
 
 static void		ft_check_alias(char **line, char *alias, char *string, int i)
 {
-	char		buf[2048];
+	char		buf[10240];
 	char		*str;
 	char		quote;
 
 	str = *line;
+	ft_bzero(buf, 10240);
 	quote = '\0';
 	while (*str)
 	{

@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/02 22:45:07 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/16 13:45:42 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/17 12:31:01 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <signal.h>
@@ -23,8 +23,6 @@ void			ft_resize(int sig)
 
 void			ft_kill(int sig)
 {
-	int		i;
-
 	sig = sig;
 	if (g_env.in_exec)
 	{
@@ -38,7 +36,6 @@ void			ft_kill(int sig)
 	{
 		ft_printf("%$\n%s 42sh (%T)%s "\
 			, PROMPT_CLR, ft_getenv(g_env.env, "USER"), "%");
-		i = ft_strlen(*g_env.saved_line);
 		free(*g_env.saved_line);
 		*g_env.saved_line = ft_strdup("\0");
 	}

@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/08 09:34:22 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/16 04:21:18 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/17 19:16:16 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -21,8 +21,9 @@ void			ft_check_env(void)
 {
 	char		**av;
 
-	if (!g_env.env)
-		g_env.env = ft_array_str_dup(environ);
+	g_env.env = NULL;
+	g_env.path = NULL;
+	g_env.env = ft_array_str_dup(environ);
 	if (!g_env.env)
 	{
 		ft_printf_fd(2, "%$42sh: Need environnement to work correctly\n%$"\

@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/13 12:48:18 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/13 13:12:52 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/17 19:00:44 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <termcap.h>
@@ -30,9 +30,6 @@ int				ft_echo(char **av)
 	ft_print_args(av, i);
 	if (end)
 		ft_putchar('\n');
-	else
-		ft_putchar('%');
-	ft_putchar('\n');
 	return (0);
 }
 

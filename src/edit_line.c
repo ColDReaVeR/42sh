@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 11:57:50 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/11 20:43:20 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/17 12:27:06 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -23,10 +23,8 @@ void			ft_del_char(char **line, int position)
 	char		*cpy;
 	int			a;
 	int			b;
-	int			bool;
 
 	str = *line;
-	bool = 0;
 	a = 0;
 	b = 0;
 	cpy = (char *) malloc(sizeof(char) * ft_strlen(str) + 1);

@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/13 16:02:35 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/16 04:12:32 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/18 01:39:20 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -14,7 +14,6 @@
 #include "libft.h"
 #include "42sh.h"
 
-static void		ft_instring(char *quote, char c, int d);
 static void		ft_find_star(char **line, int i, char *stared, char *path);
 static char		*ft_get_path(char *str, int i, int *j);
 static char		*ft_get_stared(char *str, int *j);
@@ -32,7 +31,7 @@ void			ft_replace_star(char **line)
 	str = *line;
 	while (str[i])
 	{
-		ft_instring(&quote, str[i], str[i - 1]);
+		ft_in_string(&quote, str[i], str[i - 1]);
 		if (str[i] == '*' && quote == '\0')
 		{
 			stared = NULL;
@@ -76,7 +75,7 @@ static void		ft_find_star(char **line, int i, char *stared, char *path)
 	free(new);
 }
 
-static void		ft_instring(char *quote, char c, int d)
+void			ft_in_string(char *quote, char c, int d)
 {
 	if (*quote == '\0' && ft_strchr("\"'", c))
 		*quote = c;

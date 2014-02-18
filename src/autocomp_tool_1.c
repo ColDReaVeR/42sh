@@ -6,10 +6,11 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/16 03:56:56 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/16 04:08:28 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/16 21:30:10 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
+#include <termcap.h>
 #include <dirent.h>
 #include "libft.h"
 #include "42sh.h"
@@ -19,10 +20,9 @@ static void		ft_refresh_2(char **ln, int *ps, int pv, char *new);
 
 void			ft_comp_refresh(char **line, char *buf, int *ps, int pv)
 {
-	while (*ps < (int)ft_strlen(*line))
-		ft_move_right(ps, *line);
 	while (*ps > 0)
-		ft_back(ps, line);
+		ft_move_left(ps, *line);
+	tputs(tgetstr("cd", NULL), 1, ft_put);
 	free(*line);
 	*line = ft_strdup(buf);
 	*ps += ft_putstr(*line);
@@ -73,10 +73,9 @@ static char		*ft_comp_file_4(char **ln, int ps, char *path, char *to_add)
 
 static void		ft_refresh_2(char **ln, int *ps, int pv, char *new)
 {
-	while (*ps < (int)ft_strlen(*ln))
-		ft_move_right(ps, *ln);
 	while (*ps > 0)
-		ft_back(ps, ln);
+		ft_move_left(ps, *ln);
+	tputs(tgetstr("cd", NULL), 1, ft_put);
 	free(*ln);
 	*ln = ft_strdup(new);
 	free(new);

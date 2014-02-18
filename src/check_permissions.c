@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/11 00:00:54 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/16 04:22:10 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/17 12:29:32 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -22,11 +22,9 @@ static int		ft_check_dir(char *path, char *file);
 
 char			*ft_check_exist(char *cmd)
 {
-	int			i;
 	char		*way;
 	int			ret;
 
-	i = 0;
 	way = NULL;
 	if (!ft_check_in_path(cmd, &way))
 		return (NULL);

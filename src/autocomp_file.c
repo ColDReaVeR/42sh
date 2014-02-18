@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/16 03:50:46 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/16 15:26:29 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/17 12:29:58 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -20,11 +20,7 @@ static char		*ft_comp_file_2(char *beg);
 void			ft_comp_current_dir(char **ln, int *ps, int pv, int *comp)
 {
 	char		buf[2048];
-	int			i;
-	int			j;
 
-	i = 0;
-	j = 0;
 	ft_bzero(buf, 2048);
 	if (!g_comp_lst)
 		ft_add_comp_list("./", "*");

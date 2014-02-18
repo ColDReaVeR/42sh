@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/17 22:00:27 by hestela           #+#    #+#             */
-/*   Updated: 2014/01/04 14:52:58 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/17 12:25:56 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdarg.h>
@@ -69,11 +69,9 @@ static void		ft_opt1_b(const char *form, va_list ap, int *i, int *count)
 
 static void		ft_opt2(const char *form, va_list *ap, int *i, int *count)
 {
-	int			index;
 	int			j;
 	va_list		apcpy;
 
-	index = 0;
 	j = 0;
 	va_copy(apcpy, *ap);
 	(*i)++;

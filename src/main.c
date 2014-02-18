@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/28 10:08:01 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/16 04:19:27 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/17 19:28:08 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <fcntl.h>
@@ -29,8 +29,6 @@ int				main(void)
 	char		*str;
 	t_cmd		*list;
 
-	g_env.path = NULL;
-	g_env.env = NULL;
 	ft_check_env();
 	str = NULL;
 	list = NULL;
@@ -40,6 +38,7 @@ int				main(void)
 	ft_init(g_env.term);
 	while (1)
 	{
+		ft_check_position();
 		g_prompt_len = ft_printf("%$%s 42sh (%T)%% "\
 			, PROMPT_CLR, ft_getenv(g_env.env, "USER"));
 		g_env.in_histo = 0;

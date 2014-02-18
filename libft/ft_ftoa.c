@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/27 18:42:15 by hestela           #+#    #+#             */
-/*   Updated: 2014/01/30 21:00:11 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/17 12:24:17 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -30,10 +30,8 @@ char			*ft_ftoa(double n, size_t precision)
 static int		ft_str_size(double n, size_t precision)
 {
 	int			len;
-	int			dot;
 
 	len = 0;
-	dot = 0;
 	if (n < 0)
 	{
 		len++;

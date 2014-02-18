@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 15:12:19 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/07 18:43:12 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/17 12:28:47 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -19,9 +19,6 @@ static void		ft_multi_suite(int *position, char **line);
 
 void			ft_move_to_beg(int *position, char *str)
 {
-	int			i;
-
-	i = 0;
 	if (*position == 0)
 	{
 		ft_putchar(07);

@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 13:37:42 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/07 18:47:30 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/17 12:28:33 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -20,13 +20,11 @@ static void		ft_refresh(char **line, int *position, char *new);
 void			ft_cut(char **line, int *position)
 {
 	char		*str;
-	int			len;
-	int			i;
 	int			pos;
+	int			i;
 
 	i = *position;
 	str = *line;
-	len = ft_strlen(str);
 	if (g_env.cut)
 	{
 		free(g_env.cut);
@@ -43,12 +41,10 @@ void			ft_cut(char **line, int *position)
 void			ft_copy(char **line, int position)
 {
 	char		*str;
-	int			len;
 	int			i;
 
 	i = position;
 	str = *line;
-	len = ft_strlen(str);
 	if (g_env.cut)
 	{
 		free(g_env.cut);

@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 15:39:58 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/16 14:50:25 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/18 02:27:16 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,7 @@ void		ft_replace_tilde(char **line);
 void		ft_replace_variable(char **line);
 void		ft_replace_alias(char **line);
 void		ft_replace_star(char **line);
+void		ft_in_string(char *quote, char c, int d);
 char		*ft_replace_star_2(char *path, char *stared, int *j, char *str);
 void		ft_update_stared_line(char **line, char *new, int i);
 char		**ft_split_args(char *str);
@@ -192,5 +193,8 @@ void		ft_comp_file_3(char **ln, int pv, int *ps, char *path);
 void		ft_comp_file(char **ln, int *ps, int pv, int *comp);
 void		ft_complete_all_cmd(char **line, int *ps, int pv, int *autocomp);
 void		ft_comp_cmd(char **ln, int *ps, int pv, int *comp);
+void		ft_replace_script(char **line, int i, int j);
+int			ft_check_is_cmd(char **line, char *buf, int i, int *j);
+void		ft_check_position(void);
 
 #endif /* !__42SH_H__ */
