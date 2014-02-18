@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 19:22:55 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/13 23:51:16 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/18 13:29:00 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -18,13 +18,12 @@
 
 static void		ft_restore_term_for_exec(char *cmd, int *status);
 
-void			ft_exec(char **av)
+void			ft_exec(char **av, char **env)
 {
 	char		*tmp;
 	char		*cmd;
 	int			status;
-	int			ret;
-
+	
 	tmp = NULL;
 	tmp = ft_strjoin("/", av[0]);
 	free(av[0]);
@@ -37,8 +36,7 @@ void			ft_exec(char **av)
 		if (g_env.thread == 0)
 		{
 			g_env.in_exec = NULL;
-			ret = execve(cmd, av, g_env.env);
-			ft_putnbr(ret);
+			execve(cmd, av, env);
 		}
 		else
 			ft_restore_term_for_exec(av[0] + 1, &status);

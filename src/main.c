@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/28 10:08:01 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/17 19:28:08 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/18 13:31:55 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <fcntl.h>
@@ -92,7 +92,7 @@ static void		ft_exec_list(t_cmd *list)
 		{
 			av = ft_split_args(list->line);
 			if (!ft_builtin(av))
-				ft_exec(av);
+				ft_exec(av, g_env.env);
 			ft_array_str_free(av);
 			list = list->next;
 		}

@@ -49,6 +49,7 @@ redirections:
 -> * are replaced
 -> environement variables are replaced
 -> verifying permission for complete path (dir by dir)
+-> shell scripts
 
 			+++++ FIXES +++++
 

@@ -6,7 +6,7 @@
 #    By: hestela <hestela@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/01/28 10:07:14 by hestela           #+#    #+#              #
-#    Updated: 2014/02/18 01:08:14 by hestela          ###   ########.fr        #
+#    Updated: 2014/02/18 13:43:02 by hestela          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -23,6 +23,7 @@ SOURCES = src/main.c \
 		src/move_down.c \
 		src/history.c \
 		src/env.c \
+		src/env_i.c \
 		src/cd.c \
 		src/setenv.c \
 		src/unsetenv.c \
