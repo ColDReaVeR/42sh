@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 19:22:55 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/18 13:29:00 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/18 18:34:29 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -17,13 +17,30 @@
 #include "42sh.h"
 
 static void		ft_restore_term_for_exec(char *cmd, int *status);
+static void		ft_exec_suite(char *cmd, char **av, char **env, int *status)
+{
+	char		*str;
+
+	str = ft_strdup(av[0]);
+	free(av[0]);
+	av[0] = ft_strdup(cmd);
+	g_env.thread = fork();
+	if (g_env.thread == 0)
+	{
+		g_env.in_exec = NULL;
+		execve(cmd, av, env);
+	}
+	else
+		ft_restore_term_for_exec(ft_str_multi_join(3, str + 1, " ", av[1])\
+			, status);
+}
 
 void			ft_exec(char **av, char **env)
 {
 	char		*tmp;
 	char		*cmd;
 	int			status;
-	
+
 	tmp = NULL;
 	tmp = ft_strjoin("/", av[0]);
 	free(av[0]);
@@ -31,16 +48,7 @@ void			ft_exec(char **av, char **env)
 	free(tmp);
 	cmd = ft_check_exist(av[0]);
 	if (cmd)
-	{
-		g_env.thread = fork();
-		if (g_env.thread == 0)
-		{
-			g_env.in_exec = NULL;
-			execve(cmd, av, env);
-		}
-		else
-			ft_restore_term_for_exec(av[0] + 1, &status);
-	}
+		ft_exec_suite(cmd, av, env, &status);
 	free(cmd);
 }
 

@@ -55,3 +55,4 @@ redirections:
 
 -> history crash fixed
 -> argument split fixed (don't split quoted strings)
+-> gcc and git execution fixed
