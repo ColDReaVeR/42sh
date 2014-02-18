@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 19:22:55 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/18 18:34:29 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/18 18:44:24 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -20,6 +20,7 @@ static void		ft_restore_term_for_exec(char *cmd, int *status);
 static void		ft_exec_suite(char *cmd, char **av, char **env, int *status)
 {
 	char		*str;
+	char		*new;
 
 	str = ft_strdup(av[0]);
 	free(av[0]);
@@ -31,8 +32,12 @@ static void		ft_exec_suite(char *cmd, char **av, char **env, int *status)
 		execve(cmd, av, env);
 	}
 	else
-		ft_restore_term_for_exec(ft_str_multi_join(3, str + 1, " ", av[1])\
-			, status);
+	{
+		new = ft_str_multi_join(3, str + 1, " ", av[1]);
+		ft_restore_term_for_exec(new, status);
+		free(new);
+	}
+	free(str);
 }
 
 void			ft_exec(char **av, char **env)
@@ -60,6 +65,8 @@ static void		ft_restore_term_for_exec(char *cmd, int *status)
 	signal(SIGINT, ft_kill);
 	tcsetattr(0, 0, g_env.term);
 	g_env.in_exec = cmd;
+	if (ft_strncmp(g_env.in_exec, "emacs", 5) == 0)
+		ft_putstr(C_RESET);
 	waitpid(g_env.thread, status, WUNTRACED);
 	g_env.in_exec = NULL;
 	tcgetattr(0, g_env.term);

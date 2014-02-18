@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/03 09:21:19 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/16 04:26:52 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/18 18:44:36 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <signal.h>
@@ -96,7 +96,7 @@ static void			ft_do_resume(int num)
 	tcsetattr(0, 0, g_env.term);
 	ft_got_pid_node(num);
 	ft_printf("%$42sh: Resume > %s%$\n", INFOS_CLR, g_env.in_exec, TEXT_CLR);
-	if (ft_strcmp(g_env.in_exec, "emacs") == 0)
+	if (ft_strncmp(g_env.in_exec, "emacs", 5) == 0)
 		ft_putstr(C_RESET);
 	kill(g_env.thread, SIGCONT);
 	waitpid(g_env.thread, &status, WUNTRACED);
