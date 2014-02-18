@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/18 13:37:14 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/18 14:19:16 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/18 14:37:44 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -37,8 +37,7 @@ int				ft_env_i(char **av)
 		ft_exec_without_env(av);
 		return (1);
 	}
-	return (0);
-
+	return (1);
 }
 
 static int		ft_is_option(char *opt)
