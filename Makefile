@@ -6,7 +6,7 @@
 #    By: hestela <hestela@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/01/28 10:07:14 by hestela           #+#    #+#              #
-#    Updated: 2014/02/18 13:43:02 by hestela          ###   ########.fr        #
+#    Updated: 2014/02/18 21:18:40 by hestela          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -62,7 +62,8 @@ SOURCES = src/main.c \
 		src/autocomp_tool_2.c \
 		src/autocomp_list.c \
 		src/replace_script.c \
-		src/check_position.c
+		src/check_position.c \
+		src/export.c
 
 HEADERS = inc/
 
@@ -74,7 +75,7 @@ LIBRARY = -lft
 
 LIBNAME = lib/libft.a
 
-WFLAGS = #-Werror -Wall -Wextra
+WFLAGS = -Werror -Wall -Wextra
 
 all: $(NAME)
 

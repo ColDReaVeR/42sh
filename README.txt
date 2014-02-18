@@ -18,14 +18,14 @@ edit line commands:
 
 builtins:
 
-           env  >  show environement
-        setenv  >  set environement variable
-      unsetenv  >  unset environement variable
-            cd  >  change directory
-          exit  > terminate process
-            fg  >  resume process  //// NOTE: (fg [number of suspended job])
-          jobs  > show list of suspended jobs
-          echo  > write in stdout
+            env  >  show environement variables
+ setenv | export >  set environement variable
+unsetenv | unset >  unset environement variable
+             cd  >  change directory
+           exit  > terminate process
+             fg  >  resume process  //// NOTE: (fg [number of suspended job])
+           jobs  > show list of suspended jobs
+           echo  > write in stdout
 
 signals:
 

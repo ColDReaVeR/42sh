@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 15:39:58 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/18 13:36:35 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/18 21:19:03 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ void		ft_previous_cmd(int *position, char **line);
 void		ft_next_cmd(int *position, char **line);
 void		ft_env(char **av, char **env);
 int			ft_env_i(char **av);
+char		**ft_export(char **av, char **env);
 void		ft_cd(char **av, char **env);
 char		**ft_setenv(char **av, char **env);
 char		**ft_unsetenv(char **av, char **env);

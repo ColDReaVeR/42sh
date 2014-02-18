@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 19:22:55 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/18 18:44:24 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/18 21:20:23 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -17,6 +17,26 @@
 #include "42sh.h"
 
 static void		ft_restore_term_for_exec(char *cmd, int *status);
+static void		ft_exec_suite(char *cmd, char **av, char **env, int *status);
+static int		ft_builtin_suite(char **av);
+
+void			ft_exec(char **av, char **env)
+{
+	char		*tmp;
+	char		*cmd;
+	int			status;
+
+	tmp = NULL;
+	tmp = ft_strjoin("/", av[0]);
+	free(av[0]);
+	av[0] = ft_strdup(tmp);
+	free(tmp);
+	cmd = ft_check_exist(av[0]);
+	if (cmd)
+		ft_exec_suite(cmd, av, env, &status);
+	free(cmd);
+}
+
 static void		ft_exec_suite(char *cmd, char **av, char **env, int *status)
 {
 	char		*str;
@@ -38,23 +58,6 @@ static void		ft_exec_suite(char *cmd, char **av, char **env, int *status)
 		free(new);
 	}
 	free(str);
-}
-
-void			ft_exec(char **av, char **env)
-{
-	char		*tmp;
-	char		*cmd;
-	int			status;
-
-	tmp = NULL;
-	tmp = ft_strjoin("/", av[0]);
-	free(av[0]);
-	av[0] = ft_strdup(tmp);
-	free(tmp);
-	cmd = ft_check_exist(av[0]);
-	if (cmd)
-		ft_exec_suite(cmd, av, env, &status);
-	free(cmd);
 }
 
 static void		ft_restore_term_for_exec(char *cmd, int *status)
@@ -97,12 +100,29 @@ int				ft_builtin(char **av)
 		g_env.env = ft_setenv(av, g_env.env);
 		ft_env_changes();
 	}
-	else if (ft_strcmp_case("exit", av[0]) == 0)
+	else if (!ft_builtin_suite(av)) 
+		return (0);
+	return (1);
+}
+
+static int		ft_builtin_suite(char **av)
+{
+	if (ft_strcmp_case("exit", av[0]) == 0)
 		ft_exit(av, 1);
 	else if (ft_strcmp_case("fg", av[0]) == 0)
 		ft_resume(av);
 	else if (ft_strcmp_case("jobs", av[0]) == 0)
 		ft_print_job_list();
+	else if (ft_strcmp_case("export", av[0]) == 0)
+	{
+		g_env.env = ft_export(av, g_env.env);
+		ft_env_changes();
+	}		
+	else if (ft_strcmp_case("unset", av[0]) == 0)
+	{
+		g_env.env = ft_unsetenv(av, g_env.env);
+		ft_env_changes();
+	}
 	else
 		return (0);
 	return (1);
