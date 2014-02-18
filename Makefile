@@ -6,7 +6,7 @@
 #    By: hestela <hestela@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/01/28 10:07:14 by hestela           #+#    #+#              #
-#    Updated: 2014/02/19 00:19:51 by msommagg         ###   ########.fr        #
+#    Updated: 2014/02/19 00:32:36 by msommagg         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -70,6 +70,8 @@ LIBSDIR		=	-L./lib
 LIBRARY		=	-lft
 LIBNAME		=	lib/libft.a
 WFLAGS		=	-g -Werror -Wall -Wextra
+
+export			WFLAGS
 
 all			:	$(NAME)
 
