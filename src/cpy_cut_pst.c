@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 13:37:42 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/17 12:28:33 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/19 04:10:53 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -108,15 +108,15 @@ static void		ft_refresh(char **line, int *position, char *new)
 	i = 0;
 	free(*line);
 	*line = new;
-	tputs(tgetstr("sc", NULL), 1, ft_put);
+	tputs(tgetstr("sc", NULL), 1, ft_putchar);
 	ft_putstr(new + *position);
-	tputs(tgetstr("rc", NULL), 1, ft_put);
+	tputs(tgetstr("rc", NULL), 1, ft_putchar);
 	while (i < (int)ft_strlen(g_env.cut))
 	{
-		tputs(tgetstr("nd", NULL), 1, ft_put);
+		tputs(tgetstr("nd", NULL), 1, ft_putchar);
 		i++;
 		(*position)++;
 		if ((*position + g_prompt_len + 1) % g_ws.ws_col == 1)
-			tputs(tgetstr("sf", NULL), 1, ft_put);
+			tputs(tgetstr("sf", NULL), 1, ft_putchar);
 	}
 }

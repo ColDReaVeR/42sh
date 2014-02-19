@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 15:12:19 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/17 12:28:47 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/19 04:16:52 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -56,16 +56,16 @@ void			ft_back(int *position, char **line)
 			ft_multiligne(position, line);
 		return ;
 	}
-	tputs(tgetstr("le", NULL), 1, ft_put);
+	tputs(tgetstr("le", NULL), 1, ft_putchar);
 	if ((*position + g_prompt_len) % g_ws.ws_col == 0)
 	{
-		tputs(tgetstr("sr", NULL), 1, ft_put);
+		tputs(tgetstr("sr", NULL), 1, ft_putchar);
 		if (g_env.in_histo != 0)
-			tputs(tgetstr("sf", NULL), 1, ft_put);
+			tputs(tgetstr("sf", NULL), 1, ft_putchar);
 		while (i++ < g_ws.ws_col)
-			tputs(tgetstr("nd", NULL), 1, ft_put);
+			tputs(tgetstr("nd", NULL), 1, ft_putchar);
 	}
-	tputs(tgetstr("dc", NULL), 1, ft_put);
+	tputs(tgetstr("dc", NULL), 1, ft_putchar);
 	ft_del_char(line, *position);
 	(*position)--;
 }
@@ -80,17 +80,17 @@ static void		ft_multiligne(int *position, char **line)
 	start = line[0];
 	(*position) -= 2;
 	str = line[0] + *position;
-	tputs(tgetstr("sr", NULL), 1, ft_put);
+	tputs(tgetstr("sr", NULL), 1, ft_putchar);
 	while (*(str - 1) != '\n' && str != start)
 		str--;
 	if (str == start)
 	{
 		while (i++ < g_prompt_len)
-			tputs(tgetstr("nd", NULL), 1, ft_put);
+			tputs(tgetstr("nd", NULL), 1, ft_putchar);
 	}
 	while (*(str + 1) != '\n')
 	{
-		tputs(tgetstr("nd", NULL), 1, ft_put);
+		tputs(tgetstr("nd", NULL), 1, ft_putchar);
 		str++;
 	}
 	ft_multi_suite(position, line);
@@ -99,11 +99,11 @@ static void		ft_multiligne(int *position, char **line)
 static void		ft_multi_suite(int *position, char **line)
 {
 	(*position) += 2;
-	tputs(tgetstr("nd", NULL), 1, ft_put);
+	tputs(tgetstr("nd", NULL), 1, ft_putchar);
 	ft_del_char(line, *position);
-	tputs(tgetstr("cd", NULL), 1, ft_put);
+	tputs(tgetstr("cd", NULL), 1, ft_putchar);
 	(*position)--;
-	tputs(tgetstr("sc", NULL), 1, ft_put);
+	tputs(tgetstr("sc", NULL), 1, ft_putchar);
 	ft_putstr(*line + *position);
-	tputs(tgetstr("rc", NULL), 1, ft_put);
+	tputs(tgetstr("rc", NULL), 1, ft_putchar);
 }

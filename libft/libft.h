@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/20 08:44:19 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/17 19:27:07 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/19 04:13:55 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@
 /*
 ** Write functions
 */
-int			ft_putchar(char c);
-int			ft_putchar_fd(char c, int fd);
+int			ft_putchar(int c);
+int			ft_putchar_fd(int c, int fd);
 int			ft_putstr(char const *s);
 int			ft_putstr_fd(char const *s, int fd);
 int			ft_putnstr(char const *s, size_t n);

@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 11:57:50 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/17 12:27:06 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/19 04:08:41 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -83,7 +83,7 @@ static void		ft_copy_str(int *b, int *a, char *str, char *cpy)
 static void		ft_refresh(char *cpy, char *str, int position, int a)
 {
 	cpy[a] = '\0';
-	tputs(tgetstr("sc", NULL), 1, ft_put);
+	tputs(tgetstr("sc", NULL), 1, ft_putchar);
 	ft_putstr(str + position);
-	tputs(tgetstr("rc", NULL), 1, ft_put);
+	tputs(tgetstr("rc", NULL), 1, ft_putchar);
 }

@@ -6,12 +6,12 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/24 09:25:18 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/19 03:17:31 by msommagg         ###   ########.fr       */
+/*   Updated: 2014/02/19 04:11:16 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
 
-int		ft_putchar(char c)
+int		ft_putchar(int c)
 {
 	return (write(1, &c, 1));
 }

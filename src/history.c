@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 17:16:03 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/11 20:20:14 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/19 04:17:43 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -24,7 +24,7 @@ void		ft_previous_cmd(int *position, char **line)
 	g_env.in_histo = 1;
 	while (*position > 0)
 		ft_move_left(position, *line);
-	tputs(tgetstr("cd", NULL), 1, ft_put);
+	tputs(tgetstr("cd", NULL), 1, ft_putchar);
 	if (*line)
 		free(*line);
 	g_env.histo = g_env.histo->prev;
@@ -43,7 +43,7 @@ void		ft_next_cmd(int *position, char **line)
 	}
 	while (*position > 0)
 		ft_move_left(position, *line);
-	tputs(tgetstr("cd", NULL), 1, ft_put);
+	tputs(tgetstr("cd", NULL), 1, ft_putchar);
 	if (*line)
 	free(*line);
 	g_env.histo = g_env.histo->next;

@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 11:46:28 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/16 04:10:27 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/19 04:10:38 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <signal.h>
@@ -59,7 +59,7 @@ static void		ft_read(char **line, int *position, int *autocomp)
 			ft_add_char(line, *position, *buf);
 			(*position)++;
 			if ((*position + g_prompt_len + 1) % g_ws.ws_col == 1)
-				tputs(tgetstr("sf", NULL), 1, ft_put);
+				tputs(tgetstr("sf", NULL), 1, ft_putchar);
 		}
 		else if (*buf != '\n')
 			ft_check_key(buf, line, position, autocomp);

@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/16 03:56:56 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/16 21:30:10 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/19 04:20:29 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -22,7 +22,7 @@ void			ft_comp_refresh(char **line, char *buf, int *ps, int pv)
 {
 	while (*ps > 0)
 		ft_move_left(ps, *line);
-	tputs(tgetstr("cd", NULL), 1, ft_put);
+	tputs(tgetstr("cd", NULL), 1, ft_putchar);
 	free(*line);
 	*line = ft_strdup(buf);
 	*ps += ft_putstr(*line);
@@ -75,7 +75,7 @@ static void		ft_refresh_2(char **ln, int *ps, int pv, char *new)
 {
 	while (*ps > 0)
 		ft_move_left(ps, *ln);
-	tputs(tgetstr("cd", NULL), 1, ft_put);
+	tputs(tgetstr("cd", NULL), 1, ft_putchar);
 	free(*ln);
 	*ln = ft_strdup(new);
 	free(new);

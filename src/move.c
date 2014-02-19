@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 14:58:12 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/07 21:54:07 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/19 04:15:38 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -29,16 +29,16 @@ void			ft_move_left(int *position, char *str)
 			ft_putchar(07);
 		return ;
 	}
-	tputs(tgetstr("le", NULL), 1, ft_put);
+	tputs(tgetstr("le", NULL), 1, ft_putchar);
 	(*position)--;
 	if ((*position + g_prompt_len + 1) % g_ws.ws_col == 0)
 	{
-		tputs(tgetstr("sr", NULL), 1, ft_put);
+		tputs(tgetstr("sr", NULL), 1, ft_putchar);
 		if (g_env.in_histo != 0)
-			tputs(tgetstr("sf", NULL), 1, ft_put);
+			tputs(tgetstr("sf", NULL), 1, ft_putchar);
 		while (i < g_ws.ws_col)
 		{
-			tputs(tgetstr("nd", NULL), 1, ft_put);
+			tputs(tgetstr("nd", NULL), 1, ft_putchar);
 			i++;
 		}
 	}
@@ -53,23 +53,23 @@ static void		ft_multiligne(int *position, char *str)
 	start = str;
 	(*position) -= 2;
 	str = str + *position;
-	tputs(tgetstr("sr", NULL), 1, ft_put);
+	tputs(tgetstr("sr", NULL), 1, ft_putchar);
 	while (*(str - 1) != '\n' && str != start)
 		str--;
 	if (str == start)
 	{
 		while (i < g_prompt_len)
 		{
-			tputs(tgetstr("nd", NULL), 1, ft_put);
+			tputs(tgetstr("nd", NULL), 1, ft_putchar);
 			i++;
 		}
 	}
 	while (*(str + 1) != '\n')
 	{
-		tputs(tgetstr("nd", NULL), 1, ft_put);
+		tputs(tgetstr("nd", NULL), 1, ft_putchar);
 		str++;
 	}
-	tputs(tgetstr("nd", NULL), 1, ft_put);
+	tputs(tgetstr("nd", NULL), 1, ft_putchar);
 	(*position)++;
 }
 
@@ -82,16 +82,16 @@ void			ft_move_right(int *position, char *str)
 	}
 	if (*(str + *position) == '\n')
 	{
-		tputs(tgetstr("sf", NULL), 1, ft_put);
+		tputs(tgetstr("sf", NULL), 1, ft_putchar);
 		(*position)++;
 	}
 	else if (*(str + *position))
 	{
-		tputs(tgetstr("nd", NULL), 1, ft_put);
+		tputs(tgetstr("nd", NULL), 1, ft_putchar);
 		(*position)++;
 	}
 	if ((*position + g_prompt_len + 1) % g_ws.ws_col == 1)
-		tputs(tgetstr("sf", NULL), 1, ft_put);
+		tputs(tgetstr("sf", NULL), 1, ft_putchar);
 }
 
 void			ft_move_to_word_L(int *position, char **line)

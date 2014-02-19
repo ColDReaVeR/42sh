@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/05 13:51:19 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/07 18:11:09 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/19 04:19:21 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -56,7 +56,7 @@ static void		ft_read_input(char **line, int *position)
 			(*position)++;
 			ft_bzero(buf, 42);
 			if ((*position + g_prompt_len + 1) % g_ws.ws_col == 1)
-				tputs(tgetstr("sf", NULL), 1, ft_put);
+				tputs(tgetstr("sf", NULL), 1, ft_putchar);
 		}
 		else if (*buf != '\n')
 			ft_key(buf, line, position);

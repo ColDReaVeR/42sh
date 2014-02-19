@@ -6,7 +6,7 @@
 #    By: hestela <hestela@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/01/28 10:07:14 by hestela           #+#    #+#              #
-#    Updated: 2014/02/19 00:32:36 by msommagg         ###   ########.fr        #
+#    Updated: 2014/02/19 04:11:45 by msommagg         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -41,7 +41,6 @@ SOURCES		=	src/main.c \
 				src/pipe.c \
 				src/check_quote.c \
 				src/quote_list.c \
-				src/ft_put.c \
 				src/ft_isempty.c \
 				src/check_env.c \
 				src/env_changes.c \
@@ -69,7 +68,7 @@ OBJECTS		=	$(subst src,obj,$(subst .c,.o,$(SOURCES)))
 LIBSDIR		=	-L./lib
 LIBRARY		=	-lft
 LIBNAME		=	lib/libft.a
-WFLAGS		=	-g -Werror -Wall -Wextra
+WFLAGS		=	-O3 -Werror -Wall -Wextra
 
 export			WFLAGS
 
