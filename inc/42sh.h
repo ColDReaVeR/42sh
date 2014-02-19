@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 15:39:58 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/19 20:36:40 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/19 21:24:57 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,7 +186,7 @@ void		ft_update_stared_line(char **line, char *new, int i);
 char		**ft_split_args(char *str);
 int			ft_echo(char **av);
 void		ft_autocomp(char **line, int *position, int *autocomp);
-char		*ft_autocomp_esc_space(char *str);
+char		*ft_autocomp_esc_space(char *str, t_stat file_stats);
 void		ft_comp_path(char **ln, int pv, char *buf);
 void		ft_add_comp_list(char *path, char *to_comp);
 void		ft_comp_refresh(char **line, char *buf, int *ps, int pv);

@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/16 03:50:46 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/19 20:35:53 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/19 21:25:22 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -63,14 +63,18 @@ void			ft_comp_file(char **ln, int *ps, int pv, int *comp)
 	}
 }
 
-char			*ft_autocomp_esc_space(char *str)
+char			*ft_autocomp_esc_space(char *str, t_stat file_stats)
 {
 	char		buf[500];
 	int			i;
 
 	i = 0;
 	if (!ft_strchr(str, ' '))
+	{
+		if (S_ISDIR(file_stats.st_mode))
+			return (ft_strjoin(str, "/"));
 		return (ft_strdup(str));
+	}
 	ft_bzero(buf, 500);
 	while (*str)
 	{
@@ -83,6 +87,8 @@ char			*ft_autocomp_esc_space(char *str)
 		str++;
 		i++;
 	}
+	if (S_ISDIR(file_stats.st_mode))
+		return (ft_strjoin(buf, "/"));
 	return (ft_strdup(buf));
 }
 
