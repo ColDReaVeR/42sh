@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 18:10:49 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/16 04:31:39 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/19 01:21:14 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -23,9 +23,7 @@ static void		ft_apply_changes(char **env);
 void			ft_cd(char **av, char **env)
 {
 	int			change;
-	int			i;
 
-	i = 0;
 	change = 0;
 	if (av[1] == NULL || (*av[1] == '-' && *(av[1] + 1) == '-'))
 	{
