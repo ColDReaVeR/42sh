@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 18:06:30 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/19 02:14:06 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/19 03:18:07 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -21,6 +21,7 @@ void			ft_env(char **av, char **env)
 	int			j;
 	char		*str;
 
+	i = 0;
 	if (av[0])
 	{
 		if (av[1])
