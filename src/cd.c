@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 18:10:49 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/19 00:25:06 by msommagg         ###   ########.fr       */
+/*   Updated: 2014/02/19 04:09:35 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -27,7 +27,8 @@ void			ft_cd(char **av, char **env)
 	change = 0;
 	if (av[1] == NULL || (*av[1] == '-' && *(av[1] + 1) == '-'))
 	{
-		chdir(ft_getenv(env, "HOME"));
+		if (chdir(ft_getenv(env, "HOME")))
+			return ;
 		change = 1;
 	}
 	else if (*av[1] == '-')
@@ -48,7 +49,8 @@ static void		ft_option(char **env, int *change)
 	char		*str;
 
 	str = NULL;
-	chdir(ft_getenv(env, "OLDPWD"));
+	if (chdir(ft_getenv(env, "OLDPWD")))
+		return ;
 	str = ft_strstr(ft_getenv(env, "OLDPWD"), ft_getenv(env, "USER"));
 	if (str)
 		ft_printf("~%s\n", str + ft_strlen(ft_getenv(env,"USER")));
@@ -66,7 +68,8 @@ static void		ft_path(char **av, int *change)
 		ft_check_permission(av);
 	else
 	{
-		chdir(av[1]);
+		if (chdir(av[1]))
+			return ;
 		*change = 1;
 	}
 	if (dir)
