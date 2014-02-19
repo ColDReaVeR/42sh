@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/13 12:48:18 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/17 19:00:44 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/19 11:38:50 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <termcap.h>
@@ -20,16 +20,19 @@ int				ft_echo(char **av)
 	int			end;
 	int			i;
 
-	i = 1;
-	end = 1;
-	if (av[i][0] == '-' && av[i][1] == 'n')
+	if (av[1])
 	{
-		end = 0;
-		i++;
+		i = 1;
+		end = 1;
+		if (av[i][0] == '-' && av[i][1] == 'n')
+		{
+			end = 0;
+			i++;
+		}
+		ft_print_args(av, i);
+		if (end)
+			ft_putchar('\n');
 	}
-	ft_print_args(av, i);
-	if (end)
-		ft_putchar('\n');
 	return (0);
 }
 
