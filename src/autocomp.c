@@ -6,9 +6,10 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/14 15:59:09 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/19 19:54:56 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/19 20:28:50 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include <unistd.h>
 #include <stdlib.h>
 #include <dirent.h>
 #include "libft.h"
@@ -76,10 +77,10 @@ static void		ft_file_completion(char **line, int *position, int *autocomp)
 		prev = 1;
 		ft_comp_current_dir(line, position, prevpos, autocomp);
 	}
-	else ///if (prev == 2 || line[0][prevpos - 1] != ' ')
+	else
 	{
 		prev = 2;
-		while (line[0][*position - 1] != ' ')
+		while (line[0][*position - 1] != ' ' || line[0][*position - 2] =='\\')
 			ft_move_left(position, *line);
 		prevpos = *position;
 		ft_comp_file(line, position, prevpos, autocomp);

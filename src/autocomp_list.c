@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/16 14:32:31 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/16 15:22:04 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/19 20:36:13 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -54,7 +54,7 @@ static void		ft_add_node(char *ent, char *new, t_stat file_stats)
 	if (S_ISDIR(file_stats.st_mode))
 		new = ft_strjoin(ent, "/");
 	else
-		new = ft_strdup(ent);
+		new = ft_autocomp_esc_space(ent);
 	if (!g_comp_lst)
 	{
 		g_comp_lst = malloc(sizeof(t_comp_lst));
