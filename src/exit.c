@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 19:07:43 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/19 04:46:25 by msommagg         ###   ########.fr       */
+/*   Updated: 2014/02/19 04:53:11 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -89,20 +89,20 @@ static void		ft_free_history(void)
 	{
 		while (g_env.histo->next)
 			g_env.histo = g_env.histo->next;
-		/* g_env.histo = g_env.histo->prev; */
-		/* free(g_env.histo->next); */
-		/* if (!g_env.histo->prev) */
-		/* 	return ; */
-		/* g_env.histo = g_env.histo->prev; */
+		g_env.histo = g_env.histo->prev;
+		free(g_env.histo->next);
+		if (!g_env.histo->prev)
+			return ;
+		g_env.histo = g_env.histo->prev;
 		while (g_env.histo->prev)
 		{
 			free(g_env.histo->next->line);
 			free(g_env.histo->next);
 			g_env.histo = g_env.histo->prev;
 		}
-		/* free(g_env.histo->next->line); */
-		/* free(g_env.histo->next); */
-		/* free(g_env.histo->line); */
+		free(g_env.histo->next->line);
+		free(g_env.histo->next);
+		free(g_env.histo->line);
 		free(g_env.histo);
 		g_env.histo = NULL;
 	}
