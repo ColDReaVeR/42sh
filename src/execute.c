@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 19:22:55 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/18 21:20:23 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/19 22:22:01 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -25,7 +25,7 @@ void			ft_exec(char **av, char **env)
 	char		*tmp;
 	char		*cmd;
 	int			status;
-
+	
 	tmp = NULL;
 	tmp = ft_strjoin("/", av[0]);
 	free(av[0]);

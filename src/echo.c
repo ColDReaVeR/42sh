@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/13 12:48:18 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/19 11:38:50 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/19 22:06:06 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <termcap.h>
@@ -45,8 +45,12 @@ static void		ft_print_args(char **av, int i)
 		j = 0;
 		while (av[i][j])
 		{
-			if (av[i][j] == '"' || av[i][j] == '\'')
+			if ((av[i][j] == '"' && av[i][j + 1] == '"')
+				|| (av[i][j] == '\'' && av[i][j + 1] == '\''))
+			{
+				j++;
 				ft_putchar(26);
+			}
 			else
 				ft_putchar(av[i][j]);
 			j++;

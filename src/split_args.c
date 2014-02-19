@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/13 00:24:30 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/13 12:10:39 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/19 22:20:53 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -35,7 +35,8 @@ char			**ft_split_args(char *str)
 			str++;
 		ft_instring(&quote, *str, *(str - 1));
 		array[i] = ft_ndup(str);
-		while ((*str != ' ' || quote != '\0') && *str != '\0')
+		while ((*str != ' ' || quote != '\0' || *(str - 1) == '\\')
+			&& *str != '\0')
 		{
 			str++;
 			ft_instring(&quote, *str, *(str - 1));
@@ -64,7 +65,8 @@ static int		ft_line_nbr(char *str)
 		if (*str == '\0')
 			return (count);
 		count++;
-		while ((*str != ' ' || quote) != '\0' && *str != '\0')
+		while ((*str != ' ' || *(str - 1) == '\\' || quote != '\0')
+			&& *str != '\0')
 		{
 			str++;
 			ft_instring(&quote, *str, *(str - 1));
@@ -84,14 +86,15 @@ static char		*ft_ndup(char *s)
 	i = 0;
 	size = 0;
 	ft_instring(&qt, *(s + i), *(s + i - 1));
-	while ((*(s + i) != ' ' || qt != '\0')
+	while ((*(s + i) != ' ' || qt != '\0' || *(s + i - 1) == '\\')
 		&& *(s + i) != '\0' && size++ >= 0 && i++ >= 0)
 		ft_instring(&qt, *(s + i), *(s + i - 1));
 	new = (char*) malloc(sizeof(*new) * size + 1);
 	i = 0;
 	qt = '\0';
 	ft_instring(&qt, *(s + i), *(s + i - 1));
-	while ((*(s + i) != ' ' || qt != '\0') && *(s + i) != '\0')
+	while ((*(s + i) != ' ' || qt != '\0' || *(s + i - 1) == '\\')
+		&& *(s + i) != '\0')
 	{
 		new[i] = *(s + i);
 		i++;
@@ -113,11 +116,13 @@ static void		ft_del_quote(char **av)
 {
 	int			i;
 	int			j;
+	int			k;
 	char		*string;
 
 	i = 0;
 	while (av[i])
 	{
+		k = 0;
 		j = 0;
 		if (ft_strchr(av[i], '"') || ft_strchr(av[i], '\''))
 		{
@@ -128,10 +133,11 @@ static void		ft_del_quote(char **av)
 			string--;
 			free(string);
 		}
-		while (av[i][j])
+		while (av[i][j + k])
 		{
-			if (av[i][j] == '\\' && ft_strchr("\"'`", av[i][j + 1]))
-				av[i][j] = 26;
+			if (av[i][j] == '\\' && ft_strchr("\"' `", av[i][j + 1]))
+				k++;
+			av[i][j] = av[i][j + k];
 			j++;
 		}
 		i++;
