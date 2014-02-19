@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/02 22:45:07 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/17 12:31:01 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/19 19:15:53 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <signal.h>
@@ -45,7 +45,7 @@ void			ft_suspend(int sig)
 {
 	char		cp[2];
 
-	cp[0] = 6;
+	cp[0] = 26;
 	cp[1] = 0;
 	sig = sig;
 	if (g_env.in_exec)
