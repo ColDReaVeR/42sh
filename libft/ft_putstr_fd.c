@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/24 09:31:57 by hestela           #+#    #+#             */
-/*   Updated: 2013/12/30 13:37:45 by hadrienestela    ###   ########.fr       */
+/*   Updated: 2014/02/19 03:21:25 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -14,16 +14,8 @@
 
 int		ft_putstr_fd(char const *s, int fd)
 {
-	int		i;
-
-	i = 0;
 	if (s)
-	{
-		i = ft_strlen(s);
-		write(fd, s, i);
-		s++;
-	}
+		return (write(fd, s, ft_strlen(s)));
 	else
-		i = ft_putstr_fd("(null)", fd);
-	return (i);
+		return (write(fd, "(null)", 6));
 }

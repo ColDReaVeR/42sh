@@ -6,24 +6,12 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/24 09:41:17 by hestela           #+#    #+#             */
-/*   Updated: 2013/12/11 09:44:03 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/19 03:23:25 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
 int		ft_putendl(char const *s)
 {
-	int		i;
-
-	i = 0;
-	if (s)
-	{
-		while (*s)
-		{
-			i += ft_putchar(*s);
-			s++;
-		}
-		i += ft_putchar('\n');
-	}
-	return (i);
+	return (ft_putstr(s) + ft_putchar('\n'));
 }
