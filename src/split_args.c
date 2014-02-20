@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/13 00:24:30 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/19 22:20:53 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/20 12:30:15 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -116,14 +116,14 @@ static void		ft_del_quote(char **av)
 {
 	int			i;
 	int			j;
-	int			k;
+	int			l;
 	char		*string;
 
 	i = 0;
 	while (av[i])
 	{
-		k = 0;
 		j = 0;
+		l = 0;
 		if (ft_strchr(av[i], '"') || ft_strchr(av[i], '\''))
 		{
 			string = ft_strdup(av[i]);
@@ -133,12 +133,13 @@ static void		ft_del_quote(char **av)
 			string--;
 			free(string);
 		}
-		while (av[i][j + k])
+		while (av[i][j])
 		{
-			if (av[i][j] == '\\' && ft_strchr("\"' `", av[i][j + 1]))
-				k++;
-			av[i][j] = av[i][j + k];
+			if (av[i][l] == '\\' && ft_strchr("\"' `", av[i][l + 1]))
+				l++;
+			av[i][j] = av[i][l];
 			j++;
+			l++;
 		}
 		i++;
 	}

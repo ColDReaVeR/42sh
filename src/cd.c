@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 18:10:49 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/19 01:21:14 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/20 12:51:25 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -83,6 +83,21 @@ static void		ft_check_permission(char **av)
 			, ERROR_CLR, av[1], TEXT_CLR);
 }
 
+char		**ft_update_pwd(char *str, int mode)
+{
+	char		**av;
+
+	av = (char**) malloc(sizeof(*av) * 4);
+	av[3] = '\0';
+	av[0] = ft_strdup("setenv");
+	if (mode == 1)
+		av[1] = ft_strdup("OLDPWD");
+	else if (mode == 2)
+		av[1] = ft_strdup("PWD");
+	av[2] = ft_strdup(str);
+	return (av);
+}
+
 static void		ft_apply_changes(char **env)
 {
 	char		**new;
@@ -90,15 +105,11 @@ static void		ft_apply_changes(char **env)
 	char		*tmp;
 
 	value = ft_getenv(env, "PWD");
-	tmp = ft_strjoin("* OLDPWD ", value);
-	new = ft_strsplit(tmp, ' ');
-	free(tmp);
+	new = ft_update_pwd(value, 1);
 	ft_setenv(new, env);
 	ft_array_str_free(new);
-	value = getcwd(NULL, 200);
-	tmp = ft_strjoin("* PWD ", value);
-	new = ft_strsplit(tmp, ' ');
-	free(tmp);
+	value = getcwd(NULL, 200); 
+	new = ft_update_pwd(value, 2);
 	ft_setenv(new, env);
 	ft_array_str_free(new);
 	value = NULL;
