@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/14 15:59:09 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/19 23:37:19 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/20 18:37:55 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -80,7 +80,8 @@ static void		ft_file_completion(char **line, int *position, int *autocomp)
 	else
 	{
 		prev = 2;
-		while (line[0][*position - 1] != ' ' || line[0][*position - 2] =='\\')
+		while (*position > 0
+			&& (line[0][*position - 1] != ' ' || line[0][*position - 2] =='\\'))
 			ft_move_left(position, *line);
 		prevpos = *position;
 		ft_comp_file(line, position, prevpos, autocomp);
