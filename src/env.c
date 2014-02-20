@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 18:06:30 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/19 03:18:07 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/20 13:19:34 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -99,4 +99,19 @@ static void		ft_export_new_env(char **av, int *i, char ***env)
 		(*i)++;
 	}
 	new_env[k] = '\0';
+}
+
+char			**ft_update_pwd(char *str, int mode)
+{
+	char		**av;
+
+	av = (char**) malloc(sizeof(*av) * 4);
+	av[3] = '\0';
+	av[0] = ft_strdup("setenv");
+	if (mode == 1)
+		av[1] = ft_strdup("OLDPWD");
+	else if (mode == 2)
+		av[1] = ft_strdup("PWD");
+	av[2] = ft_strdup(str);
+	return (av);
 }

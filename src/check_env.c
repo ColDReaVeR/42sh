@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/08 09:34:22 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/17 19:16:16 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/20 13:17:58 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -16,6 +16,7 @@
 static void		ft_check_have_term(char **av);
 static void		ft_check_var1(char **av);
 static void		ft_check_var2(char **av);
+static void		ft_update_shlvl(char **av);
 
 void			ft_check_env(void)
 {
@@ -26,31 +27,48 @@ void			ft_check_env(void)
 	g_env.env = ft_array_str_dup(environ);
 	if (!g_env.env)
 	{
-		ft_printf_fd(2, "%$42sh: Need environnement to work correctly\n%$"\
-			, ERROR_CLR, TEXT_CLR);
-		ft_printf("exit\n");
-		exit(EXIT_FAILURE);
+		g_env.env = (char**) malloc(sizeof(*g_env.env) * 2);
+		g_env.env[0] = ft_strdup("TERM=xterm");
+		g_env.env[1] = '\0';
 	}
 	av = (char**) malloc(sizeof(*av) * 4);
 	av[0] = (char*) malloc(sizeof(**av) * 20);
 	av[1] = (char*) malloc(sizeof(**av) * 20);
 	av[2] = (char*) malloc(sizeof(**av) * 100);
 	av[3] = '\0';
+	ft_strcpy(av[0], "setenv");
 	ft_check_have_term(av);
 	ft_check_var1(av);
 	ft_check_var2(av);
+	ft_update_shlvl(av);
 	ft_array_str_free(av);
+}
+
+static void		ft_update_shlvl(char **av)
+{
+	int			lv;
+
+	lv = ft_atoi(ft_getenv(g_env.env, "SHLVL"));
+	lv++;
+	ft_strcpy(av[1], "SHLVL");
+	ft_strcpy(av[2], ft_itoa(lv));
+	ft_builtin(av);
 }
 
 static void		ft_check_have_term(char **av)
 {
 	if (!ft_getenv(g_env.env, "TERM"))
 	{
-		ft_printf_fd(2, "%$42sh: Unknow Term\n%$", ERROR_CLR, TEXT_CLR);
-		ft_printf("exit\n");
-		exit(EXIT_FAILURE);
+		ft_strcpy(av[1], "TERM");
+		ft_strcpy(av[2], "xterm");
+		ft_builtin(av);
 	}
-	ft_strcpy(av[0], "setenv");
+	if (!ft_getenv(g_env.env, "SHLVL"))
+	{
+		ft_strcpy(av[1], "SHLVL");
+		ft_strcpy(av[2], "1");
+		ft_builtin(av);
+	}
 	ft_strcpy(av[1], "SHELL");
 	ft_strcpy(av[2], "42sh");
 	ft_builtin(av);

@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 18:10:49 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/20 12:51:25 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/20 13:19:41 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -81,21 +81,6 @@ static void		ft_check_permission(char **av)
 	else
 		ft_printf_fd(2, "%$cd: no such file or directory: %s\n%$"\
 			, ERROR_CLR, av[1], TEXT_CLR);
-}
-
-char		**ft_update_pwd(char *str, int mode)
-{
-	char		**av;
-
-	av = (char**) malloc(sizeof(*av) * 4);
-	av[3] = '\0';
-	av[0] = ft_strdup("setenv");
-	if (mode == 1)
-		av[1] = ft_strdup("OLDPWD");
-	else if (mode == 2)
-		av[1] = ft_strdup("PWD");
-	av[2] = ft_strdup(str);
-	return (av);
 }
 
 static void		ft_apply_changes(char **env)
