@@ -6,9 +6,10 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/16 03:59:42 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/19 22:30:15 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/21 10:13:23 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include <stdlib.h>
 #include "libft.h"
 
 char			*ft_get_comp_path(char *begin)
@@ -60,4 +61,32 @@ char			*ft_get_comp_rest(char *begin)
 	}
 	buf[j] = '*';
 	return (ft_strdup(buf));
+}
+
+void			ft_rewrite_path(char **new, char *path)
+{
+	char		buf[10240];
+	char		*ptr;
+	char		*str;
+	int			i;
+
+	i = 0;
+	str = *new;
+	ft_bzero(buf, 10240);
+	ptr = ft_strstr(str, path);
+	while (str++ != ptr && i++ >= 0)
+		buf[i - 1] = *(str - 1);
+	ptr += ft_strlen(path);
+	while (*path)
+	{
+		if (*path == ' ' && i++ >= 0)
+			buf[i - 1] = '\\';
+		buf[i] = *path;
+		path++;
+		i++;
+	}
+	while (*ptr && i++ >= 0 && ptr++)
+		buf[i - 1] = *(ptr - 1);
+	free(*new);
+	*new = ft_strdup(buf);
 }

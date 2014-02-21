@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/16 03:56:56 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/19 20:28:10 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/21 10:12:21 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -38,6 +38,8 @@ void			ft_comp_file_3(char **ln, int pv, int *ps, char *path)
 	char		*new;
 
 	new = ft_comp_file_4(ln, pv, path, g_comp_lst->str);
+	if (ft_strchr(path, ' '))
+		ft_rewrite_path(&new, path);
 	ft_refresh_2(ln, ps, pv, new);
 	if (!g_comp_lst->next)
 		g_comp_lst = g_comp_lst->start;
