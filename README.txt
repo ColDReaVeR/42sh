@@ -39,6 +39,8 @@ redirections:
   <: read source from file
   <<: read source from stdin while the 'END' string not found
   |: send output of cmd1 to source of cmd 2
+  &&: execute cmd 1 and cmd 2
+  ||: execute cmd 1 or cmd 2 
 
              +++++ INFOS +++++
 
