@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 15:39:58 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/21 13:58:50 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/21 15:55:07 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,8 @@ void		ft_exec_right_d(char **av1, char **av2, char **env);
 void		ft_exec_left(char **av1, char **av2, char **env);
 void		ft_exec_left_d(char **av1, char **av2, char **env);
 void		ft_get_heredoc(char **line);
+void		ft_exec_and(char **av1, char **av2, char **env);
+void		ft_exec_or(char **av1, char **av2, char **env);
 
 /*
 ** History

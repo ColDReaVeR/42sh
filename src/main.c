@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/28 10:08:01 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/18 13:31:55 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/21 15:48:02 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <fcntl.h>
@@ -108,7 +108,7 @@ static void		ft_exec_redir(char *cmd1, char *cmd2, int redir)
 {
 	char		**av1;
 	char		**av2;
-	void		(*f[5])(char**, char**, char**);
+	void		(*f[7])(char**, char**, char**);
 
 	if (ft_is_empty(cmd1) || ft_is_empty(cmd2))
 	{
@@ -120,6 +120,8 @@ static void		ft_exec_redir(char *cmd1, char *cmd2, int redir)
 	f[2] = &ft_exec_left;
 	f[3] = &ft_exec_right_d;
 	f[4] = &ft_exec_left_d;
+	f[5] = &ft_exec_and;
+	f[6] = &ft_exec_or;
 	av1 = ft_split_args(cmd1);
 	av2 = ft_split_args(cmd2);
 	f[redir - 1](av1, av2, g_env.env);

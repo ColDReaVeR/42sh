@@ -6,7 +6,7 @@
 #    By: hestela <hestela@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/01/28 10:07:14 by hestela           #+#    #+#              #
-#    Updated: 2014/02/21 10:52:22 by hestela          ###   ########.fr        #
+#    Updated: 2014/02/21 15:56:02 by hestela          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -63,7 +63,8 @@ SOURCES = src/main.c \
 		src/autocomp_list.c \
 		src/replace_script.c \
 		src/check_position.c \
-		src/export.c
+		src/export.c \
+		src/exec_and_or.c
 
 HEADERS = inc/
 
