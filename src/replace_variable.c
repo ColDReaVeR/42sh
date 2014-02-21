@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/11 22:56:55 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/16 04:14:56 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/21 14:15:58 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -68,6 +68,8 @@ static char		*ft_get_var(char *s)
 		j++;
 	}
 	buf[j] = '\0';
+	if (ft_strcmp("?", buf) == 0)
+		return (ft_itoa(g_env.prev_status));
 	return (ft_getenv(g_env.env, buf));
 }
 

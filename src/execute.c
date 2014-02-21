@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 19:22:55 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/20 12:51:51 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/21 14:23:29 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -71,6 +71,10 @@ static void		ft_restore_term_for_exec(char *cmd, int *status)
 	if (ft_strncmp(g_env.in_exec, "emacs", 5) == 0)
 		ft_putstr(C_RESET);
 	waitpid(g_env.thread, status, WUNTRACED);
+	if (!*status)
+		g_env.prev_status = *status;
+	else
+		g_env.prev_status = (*status == 256 ? 1 : 18);
 	g_env.in_exec = NULL;
 	tcgetattr(0, g_env.term);
 	g_env.term->c_lflag &= ~(ICANON);

@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/05 14:22:05 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/18 20:00:33 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/21 14:35:54 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -24,11 +24,13 @@ char			**ft_setenv(char **av, char **env)
 	if (ft_strchr(av[1], '='))
 	{
 		ft_printf("%$setenv: syntax error%$\n", ERROR_CLR, TEXT_CLR);
+		g_env.prev_status = 1;
 		return (env);
 	}
 	if (ft_array_str_len(av) > 3)
 	{
 		ft_printf("%$setenv: to many arguments%$\n", ERROR_CLR, TEXT_CLR);
+		g_env.prev_status = 1;
 		return (env);
 	}
 	else
@@ -38,6 +40,7 @@ char			**ft_setenv(char **av, char **env)
 		else
 			ft_update_value(env, av[1], av[2]);
 	}
+	g_env.prev_status = 0;
 	return (env);
 }
 

@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/13 12:48:18 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/19 22:06:06 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/21 14:34:25 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <termcap.h>
@@ -33,6 +33,7 @@ int				ft_echo(char **av)
 		if (end)
 			ft_putchar('\n');
 	}
+	g_env.prev_status = 0;
 	return (0);
 }
 

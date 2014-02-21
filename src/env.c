@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 18:06:30 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/20 13:19:34 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/21 14:28:50 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -29,20 +29,19 @@ void			ft_env(char **av, char **env)
 			if (ft_env_i(av))
 				return ;
 		}
-		while (env[i])
+		while (env[i++])
 		{
 			j = -1;
-			str = env[i];
-			ft_putstr(INFOS_CLR);
+			str = env[i - 1];
 			while (str[j] != '=' && j++ >= -1)
-				ft_putchar(str[j]);
+				ft_printf("%$%c", INFOS_CLR, str[j]);
 			ft_putstr(TEXT_CLR);
 			while (str[j] && j++ >= -1)
 				ft_putchar(str[j]);
 			ft_putchar('\n');
-			i++;
 		}
 	}
+	g_env.prev_status = 0;
 }
 
 void			ft_exec_without_env(char **av)

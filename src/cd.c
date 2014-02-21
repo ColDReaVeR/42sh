@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 18:10:49 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/20 13:19:41 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/21 14:33:17 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -41,6 +41,10 @@ void			ft_cd(char **av, char **env)
 		ft_path(av, &change);
 	if (change)
 		ft_apply_changes(env);
+	if (ft_array_str_len(av) > 3 || ft_array_str_len(av) > 2 || change == 0)
+		g_env.prev_status = 1;
+	else
+		g_env.prev_status = 0;
 }
 
 static void		ft_option(char **env, int *change)

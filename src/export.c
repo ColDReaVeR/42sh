@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/18 19:50:08 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/18 20:56:26 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/21 14:37:32 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -38,6 +38,7 @@ char			**ft_export(char **av, char **env)
 			ft_update_value(env, var, value);
 		i++;
 	}
+	g_env.prev_status = 0;
 	return (env);
 }
 
