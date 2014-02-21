@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/11 22:30:21 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/18 02:25:55 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/21 16:18:15 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -23,7 +23,7 @@ void			ft_do_replacements(char **line)
 	if (ft_strchr(*line, '*'))
 		ft_replace_star(line);
 	if (ft_strstr(*line, ".sh"))
-	  ft_replace_script(line, 0, 0);
+		ft_replace_script(line, 0, 0);
 }
 
 int				ft_check_is_cmd(char **line, char *buf, int i, int *j)

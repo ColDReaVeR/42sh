@@ -6,16 +6,16 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/18 19:50:08 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/21 14:37:32 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/21 16:20:56 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
 #include "libft.h"
 #include "42sh.h"
 
-static int      ft_exist(char *var, char **env);
-static char     **ft_add_new_var(char **env, char *name, char *value);
-static void     ft_update_value(char **env, char *name, char *value);
+static int		ft_exist(char *var, char **env);
+static char		**ft_add_new_var(char **env, char *name, char *value);
+static void		ft_update_value(char **env, char *name, char *value);
 static void		ft_get_values(char *str, char *var, char *value);
 
 char			**ft_export(char **av, char **env)
@@ -30,7 +30,7 @@ char			**ft_export(char **av, char **env)
 	while (av[i])
 	{
 		ft_bzero(var, 100);
-		ft_bzero(value,500);
+		ft_bzero(value, 500);
 		ft_get_values(av[i], var, value);
 		if (!ft_exist(var, env))
 			env = ft_add_new_var(env, var, value);
@@ -67,9 +67,9 @@ static void		ft_get_values(char *str, char *var, char *value)
 	}
 }
 
-static int      ft_exist(char *var, char **env)
+static int		ft_exist(char *var, char **env)
 {
-	int         i;
+	int			i;
 
 	i = 0;
 	while (env[i])
@@ -82,12 +82,12 @@ static int      ft_exist(char *var, char **env)
 	return (0);
 }
 
-static char     **ft_add_new_var(char **env, char *name, char *value)
+static char		**ft_add_new_var(char **env, char *name, char *value)
 {
-	char        **envcpy;
-	int         i;
-	int         len;
-	char        *tmp;
+	char		**envcpy;
+	int			i;
+	int			len;
+	char		*tmp;
 
 	envcpy = NULL;
 	i = 0;
@@ -111,10 +111,10 @@ static char     **ft_add_new_var(char **env, char *name, char *value)
 	return (envcpy);
 }
 
-static void     ft_update_value(char **env, char *name, char *value)
+static void		ft_update_value(char **env, char *name, char *value)
 {
-	int         i;
-	char        *tmp;
+	int			i;
+	char		*tmp;
 
 	i = 0;
 	while (ft_strncmp(env[i], name, ft_strlen(name)) != 0)

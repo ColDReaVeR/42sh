@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/16 03:50:46 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/19 21:25:22 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/21 16:13:09 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -115,7 +115,7 @@ static char		*ft_comp_file_2(char *beg)
 {
 	char		*path;
 	char		*to_comp;
-	char        *newpath;
+	char		*newpath;
 
 	if (!ft_strchr(beg, '/'))
 		to_comp = ft_strjoin(beg, "*");

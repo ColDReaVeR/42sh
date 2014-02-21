@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 19:22:55 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/21 14:23:29 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/21 16:15:25 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -25,7 +25,7 @@ void			ft_exec(char **av, char **env)
 	char		*tmp;
 	char		*cmd;
 	int			status;
-	
+
 	tmp = NULL;
 	tmp = ft_strjoin("/", av[0]);
 	free(av[0]);
@@ -104,7 +104,7 @@ int				ft_builtin(char **av)
 		g_env.env = ft_setenv(av, g_env.env);
 		ft_env_changes();
 	}
-	else if (!ft_builtin_suite(av)) 
+	else if (!ft_builtin_suite(av))
 		return (0);
 	return (1);
 }
@@ -121,7 +121,7 @@ static int		ft_builtin_suite(char **av)
 	{
 		g_env.env = ft_export(av, g_env.env);
 		ft_env_changes();
-	}		
+	}
 	else if (ft_strcmp_case("unset", av[0]) == 0)
 	{
 		g_env.env = ft_unsetenv(av, g_env.env);

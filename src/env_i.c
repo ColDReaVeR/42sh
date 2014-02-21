@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/18 13:37:14 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/19 02:13:18 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/21 16:14:09 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -50,7 +50,7 @@ static int		ft_is_option(char *opt)
 		{
 			ft_printf("%$%s%$", ERROR_CLR\
 				, "usage: env [-i] [name=value ...] [utility [argument ...]]"
-				,TEXT_CLR);
+				, TEXT_CLR);
 			return (0);
 		}
 		opt++;
