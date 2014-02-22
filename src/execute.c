@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 19:22:55 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/21 18:22:06 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/22 16:42:16 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -101,6 +101,8 @@ int				ft_builtin(char **av)
 		g_env.env = ft_setenv(av, g_env.env);
 		ft_env_changes();
 	}
+	else if (ft_strcmp_case("history", av[0]) == 0)
+		ft_history(av);
 	else if (!ft_builtin_suite(av))
 		return (0);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 17:16:03 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/11 20:20:14 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/22 17:05:40 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -14,7 +14,7 @@
 #include "libft.h"
 #include "42sh.h"
 
-void		ft_previous_cmd(int *position, char **line)
+void			ft_previous_cmd(int *position, char **line)
 {
 	if (!g_env.histo || !g_env.histo->prev)
 	{
@@ -33,7 +33,7 @@ void		ft_previous_cmd(int *position, char **line)
 	*position += (int)ft_strlen(*line);
 }
 
-void		ft_next_cmd(int *position, char **line)
+void			ft_next_cmd(int *position, char **line)
 {
 	if (!g_env.histo || !g_env.histo->next)
 	{
@@ -55,7 +55,7 @@ void		ft_next_cmd(int *position, char **line)
 	*position += (int)ft_strlen(*line);
 }
 
-void		ft_update_history(char *line)
+void			ft_update_history(char *line)
 {
 	if (g_env.histo == NULL)
 	{

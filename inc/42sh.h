@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 15:39:58 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/22 15:13:15 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/22 16:54:26 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,7 @@ char		**ft_unsetenv(char **av, char **env);
 void		ft_cd(char **av, char **env);
 char		**ft_update_pwd(char *str, int mode);
 void		ft_exit(char **av, int type);
+void		ft_history(char **av);
 int			ft_echo(char **av);
 int			ft_put(int c);
 

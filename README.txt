@@ -1,36 +1,37 @@
 edit line commands:
 
-         right  >  next char
-          left  >  previous char
-  ctrl + right  >  next word
-   ctrl + left  >  previous word
-     ctrl + up  >  move up
-   ctrl + down  >  move_down
-      ctrl + a  >  move to begin
-      ctrl + e  >  move to end
-      ctrl + w  >  copy
-      ctrl + x  >  paste
-       alt + w  >  cut
-            up  >  previous command
-          down  >  next command
-        ctrl_d  >  terminate line with nul character
-           tab  >  autocompletion
+           right  >  next char
+            left  >  previous char
+    ctrl + right  >  next word
+     ctrl + left  >  previous word
+       ctrl + up  >  move up
+     ctrl + down  >  move_down
+        ctrl + a  >  move to begin
+        ctrl + e  >  move to end
+        ctrl + w  >  copy
+        ctrl + x  >  paste
+         alt + w  >  cut
+              up  >  previous command
+            down  >  next command
+          ctrl_d  >  terminate line with nul character
+             tab  >  autocompletion
 
 builtins:
 
-            env  >  show environement variables
- setenv | export >  set environement variable
-unsetenv | unset >  unset environement variable
-             cd  >  change directory
-           exit  > terminate process
-             fg  >  resume process  //// NOTE: (fg [number of suspended job])
-           jobs  > show list of suspended jobs
-           echo  > write in stdout
+             env  >  show environement variables
+ setenv | export  >  set environement variable
+unsetenv | unset  >  unset environement variable
+              cd  >  change directory
+            exit  >  terminate process
+              fg  >  resume process  //// NOTE: (fg [number of suspended job])
+            jobs  >  show list of suspended jobs
+         history  >  print history list
+            echo  >  write in stdout
 
 signals:
 
-        ctrl_c  > terminate process
-        ctrl_z  > Suspend job (and add to list)
+          ctrl_c  >  terminate process
+          ctrl_z  >  Suspend job (and add to list)
 
 redirections:
 
