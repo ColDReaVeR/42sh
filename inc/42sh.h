@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 15:39:58 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/22 16:54:26 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/22 17:23:21 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,8 @@ void		ft_get_input(char **line);
 void		ft_check_position(void);
 void		ft_check_key(char *buf, char **line, int *position, int *comp);
 t_cmd		*ft_parser(char **line);
-char		**ft_split_args(char *str);
+int			ft_get_redir_id(char *str);
+char		**ft_split_args(char *str, int i);
 
 /*
 ** Line édition

@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/13 00:24:30 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/20 12:30:15 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/22 17:26:27 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -15,17 +15,15 @@
 static int		ft_line_nbr(char *str);
 static char		*ft_ndup(char *s);
 static void		ft_instring(char *quote, char c, int d);
-static void		ft_del_quote(char **av);
+static void		ft_del_quote(char **av, int i, int j, int l);
 
-char			**ft_split_args(char *str)
+char			**ft_split_args(char *str, int i)
 {
 	char		**array;
-	int			i;
 	int			lines;
 	char		quote;
 
 	quote = '\0';
-	i = 0;
 	lines = ft_line_nbr(str);
 	array = (char**) malloc(sizeof(*array) * (lines + 1));
 	array[lines] = '\0';
@@ -43,7 +41,7 @@ char			**ft_split_args(char *str)
 		}
 		i++;
 	}
-	ft_del_quote(array);
+	ft_del_quote(array, 0, 0, 0);
 	return (array);
 }
 
@@ -112,14 +110,10 @@ static void		ft_instring(char *quote, char c, int d)
 		*quote = '\0';
 }
 
-static void		ft_del_quote(char **av)
+static void		ft_del_quote(char **av, int i, int j, int l)
 {
-	int			i;
-	int			j;
-	int			l;
 	char		*string;
 
-	i = 0;
 	while (av[i])
 	{
 		j = 0;

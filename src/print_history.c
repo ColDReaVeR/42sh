@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/22 17:03:49 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/22 17:05:58 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/22 17:27:58 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -14,7 +14,7 @@
 
 static int		ft_list_len(t_histo *list);
 static void		ft_print_history(t_histo *list);
-	
+
 void			ft_history(char **av)
 {
 	int			nb;

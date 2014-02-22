@@ -6,7 +6,7 @@
 #    By: hestela <hestela@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/01/28 10:07:14 by hestela           #+#    #+#              #
-#    Updated: 2014/02/22 17:06:41 by hestela          ###   ########.fr        #
+#    Updated: 2014/02/22 17:20:31 by hestela          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -34,6 +34,7 @@ SOURCES = src/main.c \
 		src/suspended_pid_list.c \
 		src/jobs.c \
 		src/parse.c \
+		src/parse_tool.c \
 		src/right.c \
 		src/right_d.c \
 		src/left.c \

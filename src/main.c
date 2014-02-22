@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/28 10:08:01 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/22 15:43:39 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/22 17:30:58 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <fcntl.h>
@@ -91,7 +91,7 @@ static void		ft_exec_list(t_cmd *list)
 	{
 		if (list->redir == 0)
 		{
-			av = ft_split_args(list->line);
+			av = ft_split_args(list->line, 0);
 			if (!ft_builtin(av))
 				ft_exec(av, g_env.env);
 			ft_array_str_free(av);
@@ -123,8 +123,8 @@ static void		ft_exec_redir(char *cmd1, char *cmd2, int redir)
 	f[4] = &ft_exec_left_d;
 	f[5] = &ft_exec_and;
 	f[6] = &ft_exec_or;
-	av1 = ft_split_args(cmd1);
-	av2 = ft_split_args(cmd2);
+	av1 = ft_split_args(cmd1, 0);
+	av2 = ft_split_args(cmd2, 0);
 	f[redir - 1](av1, av2, g_env.env);
 	ft_array_str_free(av1);
 	ft_array_str_free(av2);
