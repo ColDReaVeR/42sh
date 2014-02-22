@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/14 15:59:09 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/20 18:37:55 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/22 17:53:57 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -49,7 +49,7 @@ static int		ft_iscmd(char *str, int i)
 		nbr = 1;
 		i--;
 	}
-	while (!ft_strchr(";><&|", str[i]) && i >= 0)
+	while (!ft_strchr(";&|", str[i]) && i >= 0)
 	{
 		if (str[i] != ' ' && str[i + 1] == ' ')
 			nbr++;
