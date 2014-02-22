@@ -1,3 +1,9 @@
+	=================================================================
+       
+				PROJECT COMPLETE
+				
+	=================================================================
+
 edit line commands:
 
            right  >  next char
@@ -53,9 +59,3 @@ redirections:
 -> environement variables are replaced
 -> verifying permission for complete path (dir by dir)
 -> shell scripts
-
-			+++++ FIXES +++++
-
--> history crash fixed
--> argument split fixed (don't split quoted strings)
--> gcc and git execution fixed
