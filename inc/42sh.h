@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 15:39:58 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/21 15:55:07 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/22 15:13:15 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct				s_env
 	t_alias_lst				*alias_lst;
 	int						prev_status;
 	char					**saved_line;
+	int						histo_fd;
 }							t_env;
 
 typedef struct				s_cmd

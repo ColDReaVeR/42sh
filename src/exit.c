@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 19:07:43 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/16 14:48:46 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/22 15:20:26 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -46,6 +46,7 @@ void			ft_exit(char **av, int type)
 	ft_kill_zombies();
 	ft_array_str_free(av);
 	ft_restore(g_env.term);
+	close(g_env.histo_fd);
 	exit(EXIT_SUCCESS);
 }
 
