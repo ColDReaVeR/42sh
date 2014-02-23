@@ -4,6 +4,17 @@
 				
 	=================================================================
 
+                        LEAD DEVELOPER : ESTELA Hadrien
+        OPTIMISATION AND LINUX PORTAGE : SOMMAGGIO Mickael
+                TESTING & DEVELOPEMENT : DELOUYA Camille
+                                         SCHUCK	Maxime
+
+        =================================================================
+                
+                                    FEATURES
+       
+        =================================================================
+
 edit line commands:
 
            right  >  next char
