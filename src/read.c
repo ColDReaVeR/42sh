@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 11:46:28 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/23 21:08:32 by msommagg         ###   ########.fr       */
+/*   Updated: 2014/02/23 22:38:39 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <signal.h>
@@ -38,30 +38,27 @@ void			ft_get_input(char *line)
 
 static void		ft_read(char *line, int *position, int *autocomp, int ret)
 {
-	char		buf[1024];
+	char		buf[ARG_MAX] = {0};
 	int			i;
 
-	g_env.saved_line = &line;
-	ft_bzero(buf, 1024);
-	while (!ft_strchr(buf, '\n') && ret > 0)
+	while (((ret = read(0, buf, ARG_MAX))) > 0)
 	{
-//		ft_bzero(buf, 1024);
-		ret = read(0, buf, 1024);
 		buf[ret] = '\0';
 		if (ft_isprint(*buf))
 		{
 			i = 0;
 			*autocomp = 0;
+			ft_putstr(&buf[i]);
 			while (buf[i++])
 			{
-				ft_putchar(buf[i - 1]);
-				ft_add_char(line, *position, buf[i - 1]);
-				(*position)++;
+				ft_add_char(line, (*position)++, buf[i - 1]);
 				if ((*position + g_prompt_len + 1) % g_ws.ws_col == 1)
 					tputs(tgetstr("sf", NULL), 1, ft_putchar);
 			}
 		}
 		else if (*buf != '\n')
 			ft_check_key(buf, line, position, autocomp);
+		else
+			break ;
 	}
 }

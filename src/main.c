@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/28 10:08:01 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/23 20:56:47 by msommagg         ###   ########.fr       */
+/*   Updated: 2014/02/23 22:06:34 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <fcntl.h>
@@ -55,16 +55,11 @@ static void		ft_update_cmd(char *line)
 		if (*line)
 			ft_strcpy(tmp, line);
 		else
-			ft_strcpy(tmp, '\0');
+			ft_bzero(tmp, ft_strlen(tmp));
 		if (*tmp)
-		{
-			ft_strcpy(tmp2, tmp);
-			ft_strcat(tmp2, "\n");
-			ft_strcpy(tmp, tmp2);
-		}
+			ft_strcat(tmp, "\n");
 		ft_get_input(line);
 		ft_strcpy(tmp2, line);
-		ft_bzero(line, ft_strlen(line));
 		ft_strcpy(line, tmp);
 		ft_strcat(line, tmp2);
 	}

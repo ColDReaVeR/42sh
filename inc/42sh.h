@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 15:39:58 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/23 20:35:00 by msommagg         ###   ########.fr       */
+/*   Updated: 2014/02/23 21:51:15 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ typedef struct				s_env
 	t_pidlst				*pid_list;
 	t_alias_lst				*alias_lst;
 	int						prev_status;
-	char					**saved_line;
 	int						histo_fd;
 }							t_env;
 

@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 12:35:39 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/23 19:30:42 by msommagg         ###   ########.fr       */
+/*   Updated: 2014/02/23 22:39:45 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -42,6 +42,7 @@ void			ft_check_key(char *buf, char *line, int *position, int *comp)
 	if (key == CTRL_W)
 		ft_copy(line, *position);
 	ft_check_key_suite(key, position, line);
+	ft_bzero(buf, 8);
 }
 
 static void		ft_check_key_suite(int key, int *pos, char *line)
