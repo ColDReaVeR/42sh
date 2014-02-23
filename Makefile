@@ -6,7 +6,7 @@
 #    By: hestela <hestela@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/01/28 10:07:14 by hestela           #+#    #+#              #
-#    Updated: 2014/02/23 16:25:22 by msommagg         ###   ########.fr        #
+#    Updated: 2014/02/23 18:29:59 by msommagg         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -71,7 +71,7 @@ OBJECTS		=	$(subst src,obj,$(subst .c,.o,$(SOURCES)))
 LIBSDIR		=	-L./lib
 LIBRARY		=	-lft
 LIBNAME		=	lib/libft.a
-WFLAGS		=	-O3 -Werror -Wall -Wextra
+WFLAGS		=	-g3 -Werror -Wall -Wextra
 
 export			WFLAGS
 

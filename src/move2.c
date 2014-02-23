@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 15:12:19 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/19 04:16:52 by msommagg         ###   ########.fr       */
+/*   Updated: 2014/02/23 19:52:36 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -14,8 +14,8 @@
 #include "libft.h"
 #include "42sh.h"
 
-static void		ft_multiligne(int *position, char **line);
-static void		ft_multi_suite(int *position, char **line);
+static void		ft_multiligne(int *position, char *line);
+static void		ft_multi_suite(int *position, char *line);
 
 void			ft_move_to_beg(int *position, char *str)
 {
@@ -43,12 +43,12 @@ void			ft_move_to_end(int *position, char *str)
 	}
 }
 
-void			ft_back(int *position, char **line)
+void			ft_back(int *position, char *line)
 {
 	int			i;
 
 	i = 0;
-	if (*position == 0 || *(line[0] + *position - 1) == '\n')
+	if (*position == 0 || *(line + *position - 1) == '\n')
 	{
 		if (*position == 0)
 			ft_putchar(07);
@@ -70,33 +70,33 @@ void			ft_back(int *position, char **line)
 	(*position)--;
 }
 
-static void		ft_multiligne(int *position, char **line)
+static void		ft_multiligne(int *position, char *line)
 {
 	char		*start;
-	char		*str;
+	int			str;
 	int			i;
 
 	i = 0;
-	start = line[0];
 	(*position) -= 2;
-	str = line[0] + *position;
+	start = line + *position;
+	str = *position;
 	tputs(tgetstr("sr", NULL), 1, ft_putchar);
-	while (*(str - 1) != '\n' && str != start)
+	while (*(start - 1) != '\n' && str)
 		str--;
-	if (str == start)
+	if (str == 0)
 	{
 		while (i++ < g_prompt_len)
 			tputs(tgetstr("nd", NULL), 1, ft_putchar);
 	}
-	while (*(str + 1) != '\n')
+	while (*(start + 1) != '\n')
 	{
 		tputs(tgetstr("nd", NULL), 1, ft_putchar);
-		str++;
+		start++;
 	}
 	ft_multi_suite(position, line);
 }
 
-static void		ft_multi_suite(int *position, char **line)
+static void		ft_multi_suite(int *position, char *line)
 {
 	(*position) += 2;
 	tputs(tgetstr("nd", NULL), 1, ft_putchar);
@@ -104,6 +104,6 @@ static void		ft_multi_suite(int *position, char **line)
 	tputs(tgetstr("cd", NULL), 1, ft_putchar);
 	(*position)--;
 	tputs(tgetstr("sc", NULL), 1, ft_putchar);
-	ft_putstr(*line + *position);
+	ft_putstr(line + *position);
 	tputs(tgetstr("rc", NULL), 1, ft_putchar);
 }

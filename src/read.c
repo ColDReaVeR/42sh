@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 11:46:28 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/23 00:49:50 by msommagg         ###   ########.fr       */
+/*   Updated: 2014/02/23 21:08:32 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <signal.h>
@@ -17,9 +17,9 @@
 #include "libft.h"
 #include "42sh.h"
 
-static void		ft_read(char **line, int *position, int *autocomp, int ret);
+static void		ft_read(char *line, int *position, int *autocomp, int ret);
 
-void			ft_get_input(char **line)
+void			ft_get_input(char *line)
 {
 	int				position;
 	static int		autocomp;
@@ -28,26 +28,24 @@ void			ft_get_input(char **line)
 	signal(SIGTSTP, ft_suspend);
 	position = 0;
 	if (*line)
-	{
-		free(*line);
-		*line = NULL;
-	}
-	*line = ft_strdup("\0");
+		ft_bzero(line, ft_strlen(line));
+	ft_strcpy(line, "\0");
 	ft_read(line, &position, &autocomp, 1);
-	while (position < (int)ft_strlen(*line))
-		ft_move_right(&position, *line);
+	while (position < (int)ft_strlen(line))
+		ft_move_right(&position, line);
 	ft_putchar('\n');
 }
 
-static void		ft_read(char **line, int *position, int *autocomp, int ret)
+static void		ft_read(char *line, int *position, int *autocomp, int ret)
 {
 	char		buf[1024];
 	int			i;
 
-	g_env.saved_line = line;
+	g_env.saved_line = &line;
+	ft_bzero(buf, 1024);
 	while (!ft_strchr(buf, '\n') && ret > 0)
 	{
-		ft_bzero(buf, 1024);
+//		ft_bzero(buf, 1024);
 		ret = read(0, buf, 1024);
 		buf[ret] = '\0';
 		if (ft_isprint(*buf))

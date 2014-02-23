@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 19:22:55 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/22 16:42:16 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/23 17:18:47 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -62,24 +62,20 @@ static void		ft_exec_suite(char *cmd, char **av, char **env, int *status)
 
 static void		ft_restore_term_for_exec(char *cmd, int *status)
 {
-	g_env.term->c_lflag |= ICANON;
-	g_env.term->c_lflag |= ECHO;
-	g_env.term->c_lflag |= ISIG;
+	g_env.term.c_lflag |= (ICANON | ECHO | ISIG);
 	signal(SIGINT, ft_kill);
-	tcsetattr(0, 0, g_env.term);
+	tcsetattr(0, 0, &g_env.term);
 	g_env.in_exec = cmd;
 	if (ft_strncmp(g_env.in_exec, "emacs", 5) == 0)
 		ft_putstr(C_RESET);
 	waitpid(g_env.thread, status, WUNTRACED);
 	g_env.prev_status = *status % 255;
 	g_env.in_exec = NULL;
-	tcgetattr(0, g_env.term);
-	g_env.term->c_lflag &= ~(ICANON);
-	g_env.term->c_lflag &= ~(ECHO);
-	g_env.term->c_lflag &= ~(ISIG);
-	g_env.term->c_cc[VMIN] = 1;
-	g_env.term->c_cc[VTIME] = 0;
-	tcsetattr(0, 0, g_env.term);
+	tcgetattr(0, &g_env.term);
+	g_env.term.c_lflag &= ~(ICANON | ECHO | ISIG);
+	g_env.term.c_cc[VMIN] = 1;
+	g_env.term.c_cc[VTIME] = 0;
+	tcsetattr(0, 0, &g_env.term);
 	signal(SIGINT, SIG_IGN);
 }
 

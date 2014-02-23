@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/15 12:55:18 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/19 04:10:12 by msommagg         ###   ########.fr       */
+/*   Updated: 2014/02/23 20:49:30 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <fcntl.h>
@@ -49,7 +49,7 @@ static void			ft_write_buf(char *cmd2)
 		if (*str)
 			ft_putendl_fd(str, fd);
 		g_prompt_len = ft_printf("%$heredoc_$> %$", PROMPT_CLR, TEXT_CLR);
-		ft_get_heredoc(&str);
+		ft_get_heredoc(str);
 	}
 	ptr = ft_strstr(str, cmd2);
 	while (str != ptr)

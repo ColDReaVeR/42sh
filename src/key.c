@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 12:35:39 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/23 16:23:04 by msommagg         ###   ########.fr       */
+/*   Updated: 2014/02/23 19:30:42 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -14,13 +14,13 @@
 #include "42sh.h"
 
 static int		ft_getkey(char *str);
-static void		ft_check_key_suite(int key, int *pos, char **line);
-static void		ft_ctrl_d(int *pos, char **line);
+static void		ft_check_key_suite(int key, int *pos, char *line);
+static void		ft_ctrl_d(int *pos, char *line);
 
-void			ft_check_key(char *buf, char **line, int *position, int *comp)
+void			ft_check_key(char *buf, char *line, int *position, int *comp)
 {
 	int				key;
-	static char		saved[1024];
+	static char		saved[ARG_MAX];
 
 	key = ft_getkey(buf);
 	if (key == TAB)
@@ -30,7 +30,7 @@ void			ft_check_key(char *buf, char **line, int *position, int *comp)
 	if (key == UP && g_env.quote_wait == 0)
 	{
 		if (g_env.in_histo == 0)
-			ft_strcpy(saved, *line);
+			ft_strcpy(saved, line);
 		ft_previous_cmd(position, line);
 	}
 	if (key == DOWN && g_env.quote_wait == 0)
@@ -44,7 +44,7 @@ void			ft_check_key(char *buf, char **line, int *position, int *comp)
 	ft_check_key_suite(key, position, line);
 }
 
-static void		ft_check_key_suite(int key, int *pos, char **line)
+static void		ft_check_key_suite(int key, int *pos, char *line)
 {
 
 	if (key == CTRL_LEFT)
@@ -56,13 +56,13 @@ static void		ft_check_key_suite(int key, int *pos, char **line)
 	if (key == CTRL_DW)
 		ft_move_down(pos, line);
 	if (key == CTRL_A || key == HOME)
-		ft_move_to_beg(pos, *line);
+		ft_move_to_beg(pos, line);
 	if (key == CTRL_E || key == END)
-		ft_move_to_end(pos, *line);
+		ft_move_to_end(pos, line);
 	if (key == LEFT)
-		ft_move_left(pos, *line);
+		ft_move_left(pos, line);
 	if (key == RIGHT)
-		ft_move_right(pos, *line);
+		ft_move_right(pos, line);
 	if (key == BACK)
 		ft_back(pos, line);
 	if (key == CTRL_D)
@@ -71,16 +71,16 @@ static void		ft_check_key_suite(int key, int *pos, char **line)
 		ft_kill(1);
 }
 
-static void		ft_ctrl_d(int *pos, char **line)
+static void		ft_ctrl_d(int *pos, char *line)
 {
-	if (!ft_strlen(*line) && g_env.quote_wait == 0)
+	if (!ft_strlen(line) && g_env.quote_wait == 0)
 	{
 		ft_putchar('\n');
 		ft_exit(NULL, 0);
 	}
-	else if (*pos == (int)ft_strlen(*line))
+	else if (*pos == (int)ft_strlen(line))
 		ft_putchar(7);
-	else if (*pos != (int)ft_strlen(*line) && (int)ft_strlen(*line) != 0)
+	else if (*pos != (int)ft_strlen(line) && (int)ft_strlen(line) != 0)
 	{
 		ft_del_char(line, *pos + 1);
 		tputs(tgetstr("dc", NULL), 1, ft_putchar);

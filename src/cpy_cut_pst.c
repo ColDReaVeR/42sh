@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 13:37:42 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/19 04:10:53 by msommagg         ###   ########.fr       */
+/*   Updated: 2014/02/23 19:38:59 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -15,47 +15,42 @@
 #include "42sh.h"
 
 static void		ft_concat(int *i, char *new, char *str, int *position);
-static void		ft_refresh(char **line, int *position, char *new);
+static void		ft_refresh(char *line, int *position, char *new);
 
-void			ft_cut(char **line, int *position)
+void			ft_cut(char *line, int *position)
 {
-	char		*str;
 	int			pos;
 	int			i;
 
 	i = *position;
-	str = *line;
 	if (g_env.cut)
 	{
 		free(g_env.cut);
 		g_env.cut = NULL;
 	}
-	g_env.cut = ft_strdup(str + i);
+	g_env.cut = ft_strdup(line + i);
 	pos = *position;
-	while (*position < (int)ft_strlen(*line))
-		ft_move_right(position, *line);
+	while (*position < (int)ft_strlen(line))
+		ft_move_right(position, line);
 	while (*position > pos)
 		ft_back(position, line);
 }
 
-void			ft_copy(char **line, int position)
+void			ft_copy(char *line, int position)
 {
-	char		*str;
 	int			i;
 
 	i = position;
-	str = *line;
 	if (g_env.cut)
 	{
 		free(g_env.cut);
 		g_env.cut = NULL;
 	}
-	g_env.cut = ft_strdup(str + i);
+	g_env.cut = ft_strdup(line + i);
 }
 
-void			ft_paste(char **line, int *position)
+void			ft_paste(char *line, int *position)
 {
-	char		*str;
 	char		*new;
 	int			i[3];
 	int			len1;
@@ -66,14 +61,13 @@ void			ft_paste(char **line, int *position)
 		i[0] = 0;
 		i[1] = 0;
 		i[2] = 0;
-		str = *line;
-		len1 = ft_strlen(str);
+		len1 = ft_strlen(line);
 		len2 = ft_strlen(g_env.cut);
 		if ((len1 + g_prompt_len + 1) / g_ws.ws_col
 		< (len1 + len2 + g_prompt_len + 1) / g_ws.ws_col)
 			g_env.in_histo = 1;
 		new = (char *) malloc(sizeof(*new) * (len1 + 1 + len2));
-		ft_concat(i, new, str, position);
+		ft_concat(i, new, line, position);
 		new[i[1]] = '\0';
 		ft_refresh(line, position, new);
 	}
@@ -101,13 +95,12 @@ static void		ft_concat(int *i, char *new, char *str, int *position)
 	}
 }
 
-static void		ft_refresh(char **line, int *position, char *new)
+static void		ft_refresh(char *line, int *position, char *new)
 {
 	int			i;
 
 	i = 0;
-	free(*line);
-	*line = new;
+	ft_strcpy(line, new);
 	tputs(tgetstr("sc", NULL), 1, ft_putchar);
 	ft_putstr(new + *position);
 	tputs(tgetstr("rc", NULL), 1, ft_putchar);

@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/16 21:01:35 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/23 00:40:17 by msommagg         ###   ########.fr       */
+/*   Updated: 2014/02/23 20:44:52 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -15,38 +15,37 @@
 #include "libft.h"
 #include "42sh.h"
 
-static int		ft_add_script(char **line, char *buf, int i, int *j);
+static int		ft_add_script(char *line, char *buf, int i, int *j);
 static char		*ft_script_path(char *str, int i);
 static char		*ft_add_insert(char *script);
 static void		ft_insert_script(char *to_insert, char *buf, int j);
 
-void			ft_replace_script(char **line, int i, int j)
+void			ft_replace_script(char *line, int i, int j)
 {
 	char		buf[10240];
 	char		quote;
 
 	ft_bzero(buf, 10240);
 	quote = '\0';
-	while (line[0][i])
+	while (line[i])
 	{
-		ft_in_string(&quote, line[0][i], line[0][i - 1]);
-		if (ft_strncmp(line[0] + i, ".sh", 3) == 0 && quote == '\0')
+		ft_in_string(&quote, line[i], line[i - 1]);
+		if (ft_strncmp(line + i, ".sh", 3) == 0 && quote == '\0')
 		{
 			while (i >= 0
-				&& !ft_strchr(" ;&|<>", line[0][i]) && i-- >= 0 && j-- >= 0)
+				&& !ft_strchr(" ;&|<>", line[i]) && i-- >= 0 && j-- >= 0)
 				buf[j + 1] = '\0';
 			j++;
 			i++;
 			i += ft_add_script(line, buf, i, &j);
 		}
 		else if (i++ >= 0 && j++ >= 0)
-			buf[j - 1] = line[0][i - 1];
+			buf[j - 1] = line[i - 1];
 	}
-	free(*line);
-	*line = ft_strdup(buf);
+	ft_strcpy(line, buf);
 }
 
-static int		ft_add_script(char **line, char *buf, int i, int *j)
+static int		ft_add_script(char *line, char *buf, int i, int *j)
 {
 	char		*str;
 	char		*to_insert;
@@ -55,7 +54,7 @@ static int		ft_add_script(char **line, char *buf, int i, int *j)
 	int			l;
 
 	l = 0;
-	str = *line;
+	str = line;
 	script = ft_script_path(str, i);
 	len = ft_strlen(script);
 	if (ft_check_is_cmd(line, buf, i, j))

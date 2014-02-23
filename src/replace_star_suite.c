@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/14 04:02:14 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/14 15:00:33 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/23 20:31:33 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -46,7 +46,7 @@ char			*ft_replace_star_2(char *path, char *stared, int *j, char *str)
 	return (count ? ft_strdup(new) : NULL);
 }
 
-void			ft_update_stared_line(char **line, char *new, int i)
+void			ft_update_stared_line(char *line, char *new, int i)
 {
 	char		*str;
 	char		newline[10240];
@@ -55,7 +55,7 @@ void			ft_update_stared_line(char **line, char *new, int i)
 
 	j = 0;
 	k = 0;
-	str = *line;
+	str = line;
 	ft_bzero(newline, 10240);
 	while (!ft_strchr(" ;><&|", str[i]) && i >= 0)
 		i--;
@@ -71,8 +71,7 @@ void			ft_update_stared_line(char **line, char *new, int i)
 		j++;
 	while (str[j] && k++ >= 0 && j++ >= 0)
 		newline[k - 1] = str[j - 1];
-	free(*line);
-	*line = ft_strdup(newline);
+	ft_strcpy(line, newline);
 }
 
 static char		*ft_get_rest(char *str, int *j)

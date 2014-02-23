@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 19:07:43 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/23 00:41:05 by msommagg         ###   ########.fr       */
+/*   Updated: 2014/02/23 17:15:43 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -18,7 +18,7 @@
 #include "42sh.h"
 
 static void		ft_free_history(void);
-static void		ft_restore(t_term *term);
+static void		ft_restore(void);
 static void		ft_kill_zombies(void);
 static int		ft_job_exists(int type);
 
@@ -35,7 +35,7 @@ void			ft_exit(char **av, int type)
 	}
 	ft_kill_zombies();
 	ft_array_str_free(av);
-	ft_restore(g_env.term);
+	ft_restore();
 	exit(EXIT_SUCCESS);
 }
 
@@ -58,7 +58,7 @@ static int		ft_job_exists(int type)
 	return (0);
 }
 
-static void		ft_restore(t_term *term)
+static void		ft_restore(void)
 {
 	t_alias_lst		*node;
 
@@ -76,10 +76,8 @@ static void		ft_restore(t_term *term)
 	ft_free_history();
 	if (g_env.cut)
 		free(g_env.cut);
-	term->c_lflag |= ICANON;
-	term->c_lflag |= ECHO;
-	term->c_lflag |= ISIG;
-	tcsetattr(0, 0, term);
+	g_env.term.c_lflag |= (ICANON | ECHO | ISIG);
+	tcsetattr(0, 0, &g_env.term);
 	if (g_env.histo_fd)
 		close(g_env.histo_fd);
 	ft_printf("%$exit\n%$", F_WHITE, C_RESET);

@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 14:58:12 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/19 04:15:38 by msommagg         ###   ########.fr       */
+/*   Updated: 2014/02/23 19:43:07 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -94,38 +94,32 @@ void			ft_move_right(int *position, char *str)
 		tputs(tgetstr("sf", NULL), 1, ft_putchar);
 }
 
-void			ft_move_to_word_L(int *position, char **line)
+void			ft_move_to_word_L(int *position, char *line)
 {
-	char	*str;
-
 	if (*position == 0)
 	{
 		ft_putchar(07);
 		return ;
 	}
-	str = *line;
 	if (*position > 0)
-		ft_move_left(position, *line);
-	while (*(str + *position) == ' ' && *position > 0)
-		ft_move_left(position, *line);
-	while (*(str + (*position - 1)) != ' ' && *position > 0)
-		ft_move_left(position, *line);
+		ft_move_left(position, line);
+	while (*(line + *position) == ' ' && *position > 0)
+		ft_move_left(position, line);
+	while (*(line + (*position - 1)) != ' ' && *position > 0)
+		ft_move_left(position, line);
 }
 
-void			ft_move_to_word_R(int *position, char **line)
+void			ft_move_to_word_R(int *position, char *line)
 {
-	char	*str;
-
-	str = *line;
-	if (*position == (int)ft_strlen(str))
+	if (*position == (int)ft_strlen(line))
 	{
 		ft_putchar(07);
 		return ;
 	}
-	if (*position < (int)ft_strlen(*line))
-		ft_move_right(position, *line);
-	while (*(str + *position) != ' ' && *position < (int)ft_strlen(*line))
-		ft_move_right(position, *line);
-	while (*(str + *position) == ' ' && *(str + *position))
-		ft_move_right(position, *line);
+	if (*position < (int)ft_strlen(line))
+		ft_move_right(position, line);
+	while (*(line + *position) != ' ' && *position < (int)ft_strlen(line))
+		ft_move_right(position, line);
+	while (*(line + *position) == ' ' && *(line + *position))
+		ft_move_right(position, line);
 }

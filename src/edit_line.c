@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 11:57:50 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/19 04:08:41 by msommagg         ###   ########.fr       */
+/*   Updated: 2014/02/23 20:48:05 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -17,14 +17,14 @@
 static void		ft_copy_str(int *b, int *a, char *str, char *cpy);
 static void		ft_refresh(char *cpy, char *str, int position, int a);
 
-void			ft_del_char(char **line, int position)
+void			ft_del_char(char *line, int position)
 {
 	char		*str;
 	char		*cpy;
 	int			a;
 	int			b;
 
-	str = *line;
+	str = line;
 	a = 0;
 	b = 0;
 	cpy = (char *) malloc(sizeof(char) * ft_strlen(str) + 1);
@@ -40,12 +40,12 @@ void			ft_del_char(char **line, int position)
 		}
 	}
 	cpy[a] = '\0';
-	free(*line);
-	*line = cpy;
+	ft_strcpy(line, cpy);
+	free(cpy);
 }
 
 
-void			ft_add_char(char **line, int position, char c)
+void			ft_add_char(char *line, int position, char c)
 {
 	char		*str;
 	char		*cpy;
@@ -53,7 +53,7 @@ void			ft_add_char(char **line, int position, char c)
 	int			b;
 	int			bool;
 
-	str = *line;
+	str = line;
 	bool = 0;
 	a = 0;
 	b = 0;
@@ -70,7 +70,8 @@ void			ft_add_char(char **line, int position, char c)
 			ft_copy_str(&b, &a, str, cpy);
 	}
 	ft_refresh(cpy, str, position, a);
-	*line = cpy;
+	ft_strcpy(line, cpy);
+	free(cpy);
 }
 
 static void		ft_copy_str(int *b, int *a, char *str, char *cpy)
