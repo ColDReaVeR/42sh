@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/11 00:09:56 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/23 16:23:30 by msommagg         ###   ########.fr       */
+/*   Updated: 2014/02/23 16:43:52 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <sys/ioctl.h>
@@ -39,9 +39,7 @@ void			ft_init(t_term *term)
 	if (tgetent(buf, ft_getenv(g_env.env, "TERM")) == -1)
 		exit(EXIT_FAILURE);
 	tcgetattr(0, term);
-	term->c_lflag &= ~(ICANON);
-	term->c_lflag &= ~(ECHO);
-	term->c_lflag &= ~(ISIG);
+	term->c_lflag &= ~(ICANON | ECHO | ISIG);
 	term->c_cc[VMIN] = 1;
 	term->c_cc[VTIME] = 0;
 	tcsetattr(0, 0, term);
