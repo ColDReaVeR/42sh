@@ -6,16 +6,12 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/28 10:08:01 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/22 17:30:58 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/23 15:31:31 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include <termios.h>
-#include <termcap.h>
-#include <sys/wait.h>
-#include <sys/ioctl.h>
 #include "libft.h"
 #include "42sh.h"
 
@@ -32,8 +28,6 @@ int				main(void)
 	ft_check_env();
 	str = NULL;
 	list = NULL;
-	ioctl(1, TIOCGWINSZ, &g_ws);
-	signal(SIGWINCH, ft_resize);
 	g_env.term = malloc(sizeof(t_term));
 	ft_init(g_env.term);
 	while (1)
@@ -44,7 +38,6 @@ int				main(void)
 		g_env.in_histo = 0;
 		ft_update_cmd(&str);
 		ft_update_history(str);
-		ft_putendl_fd(str, g_env.histo_fd);
 		ft_do_replacements(&str);
 		list = ft_parser(&str);
 		ft_exec_list(list);

@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 17:16:03 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/23 00:40:47 by msommagg         ###   ########.fr       */
+/*   Updated: 2014/02/23 16:23:54 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -33,7 +33,7 @@ void			ft_previous_cmd(int *position, char **line)
 	*position += (int)ft_strlen(*line);
 }
 
-void			ft_next_cmd(int *position, char **line)
+void			ft_next_cmd(int *position, char **line, char *buf)
 {
 	if (!g_env.histo || !g_env.histo->next)
 	{
@@ -50,12 +50,12 @@ void			ft_next_cmd(int *position, char **line)
 	if (g_env.histo->line)
 		*line = ft_strdup(g_env.histo->line);
 	else
-		*line = ft_strdup('\0');
+		*line = ft_strdup(buf);
 	ft_putstr(*line);
 	*position += (int)ft_strlen(*line);
 }
 
-void			ft_update_history(char *line)
+static void		ft_update(char *line)
 {
 	if (g_env.histo == NULL)
 	{
@@ -81,5 +81,22 @@ void			ft_update_history(char *line)
 		g_env.histo = g_env.histo->next;
 		g_env.histo->next = NULL;
 		g_env.histo->line = NULL;
+	}
+}
+
+void			ft_update_history(char *line)
+{
+	if (*line)
+	{
+		ft_update(line);
+		ft_putendl_fd(line, g_env.histo_fd);
+	}
+	else
+	{
+		if (g_env.histo)
+		{
+			while (g_env.histo->next)
+				g_env.histo = g_env.histo->next;
+		}
 	}
 }

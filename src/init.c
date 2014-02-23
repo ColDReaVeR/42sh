@@ -6,9 +6,10 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/11 00:09:56 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/23 14:39:20 by msommagg         ###   ########.fr       */
+/*   Updated: 2014/02/23 16:23:30 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include <sys/ioctl.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <stdlib.h>
@@ -26,6 +27,8 @@ void			ft_init(t_term *term)
 	char		buf[1024];
 	char		*histo_path;
 
+	ioctl(1, TIOCGWINSZ, &g_ws);
+	signal(SIGWINCH, ft_resize);
 	g_env.alias_lst = NULL;
 	g_env.quote_wait = 0;
 	signal(SIGINT, SIG_IGN);
