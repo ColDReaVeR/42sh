@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/11 00:09:56 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/22 15:45:14 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/23 14:39:20 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -42,7 +42,7 @@ void			ft_init(t_term *term)
 	term->c_cc[VMIN] = 1;
 	term->c_cc[VTIME] = 0;
 	tcsetattr(0, 0, term);
-	histo_path = ft_strjoin(ft_getenv(g_env.env, "HOME"), "/.zshrc_history");
+	histo_path = ft_strjoin(ft_getenv(g_env.env, "HOME"), "/.42sh_histo");
 	g_env.histo_fd = open(histo_path, O_CREAT | O_RDWR, 0777);
 	ft_get_history();
 }
