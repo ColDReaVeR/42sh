@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 11:57:50 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/23 20:48:05 by msommagg         ###   ########.fr       */
+/*   Updated: 2014/02/23 23:26:40 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -14,77 +14,57 @@
 #include "libft.h"
 #include "42sh.h"
 
-static void		ft_copy_str(int *b, int *a, char *str, char *cpy);
-static void		ft_refresh(char *cpy, char *str, int position, int a);
+static void		ft_refresh(char *line, char *cpy, int position);
 
 void			ft_del_char(char *line, int position)
 {
-	char		*str;
-	char		*cpy;
+	char		cpy[ARG_MAX];
 	int			a;
 	int			b;
 
-	str = line;
 	a = 0;
 	b = 0;
-	cpy = (char *) malloc(sizeof(char) * ft_strlen(str) + 1);
-	while (str[b])
+	while (line[b])
 	{
 		if (b == position - 1)
 			b++;
 		else
-		{
-			cpy[a] = str[b];
-			a++;
-			b++;
-		}
+			cpy[a++] = line[b++];
 	}
 	cpy[a] = '\0';
 	ft_strcpy(line, cpy);
-	free(cpy);
 }
 
 
 void			ft_add_char(char *line, int position, char c)
 {
-	char		*str;
-	char		*cpy;
+	char		cpy[ARG_MAX];
 	int			a;
 	int			b;
 	int			bool;
 
-	str = line;
 	bool = 0;
 	a = 0;
 	b = 0;
-	cpy = (char *) malloc(sizeof(char) * ft_strlen(str) + 2);
-	while (b < (int)ft_strlen(str) + 1)
+	ft_strcpy(cpy, line);
+	while (b < (int)ft_strlen(line) + 1)
 	{
 		if (b == position && bool == 0)
 		{
-			cpy[a] = c;
-			a++;
+			cpy[a++] = c;
 			bool = 1;
 		}
 		else
-			ft_copy_str(&b, &a, str, cpy);
+			cpy[a++] = line[b++];
 	}
-	ft_refresh(cpy, str, position, a);
-	ft_strcpy(line, cpy);
-	free(cpy);
-}
-
-static void		ft_copy_str(int *b, int *a, char *str, char *cpy)
-{
-	cpy[*a] = str[*b];
-	(*a)++;
-	(*b)++;
-}
-
-static void		ft_refresh(char *cpy, char *str, int position, int a)
-{
 	cpy[a] = '\0';
+	ft_refresh(line, cpy, position);
+}
+
+static void		ft_refresh(char *line, char *cpy, int position)
+{
 	tputs(tgetstr("sc", NULL), 1, ft_putchar);
-	ft_putstr(str + position);
+	ft_putstr(line + position);
 	tputs(tgetstr("rc", NULL), 1, ft_putchar);
+	ft_strcpy(line, cpy);
 }
