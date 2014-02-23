@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 17:16:03 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/23 15:19:28 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/23 15:34:58 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -55,7 +55,7 @@ void			ft_next_cmd(int *position, char **line, char *buf)
 	*position += (int)ft_strlen(*line);
 }
 
-void			ft_update_history(char *line)
+static void		ft_update(char *line)
 {
 	if (g_env.histo == NULL)
 	{
@@ -81,5 +81,22 @@ void			ft_update_history(char *line)
 		g_env.histo = g_env.histo->next;
 		g_env.histo->next = NULL;
 		g_env.histo->line = NULL;
+	}
+}
+
+void			ft_update_history(char *line)
+{
+	if (*line)
+	{
+		ft_update(line);
+		ft_putendl_fd(line, g_env.histo_fd);
+	}
+	else
+	{
+		if (g_env.histo)
+		{
+			while (g_env.histo->next)
+				g_env.histo = g_env.histo->next;
+		}
 	}
 }

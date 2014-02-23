@@ -6,7 +6,7 @@
 #    By: hestela <hestela@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/01/28 10:07:14 by hestela           #+#    #+#              #
-#    Updated: 2014/02/22 17:20:31 by hestela          ###   ########.fr        #
+#    Updated: 2014/02/23 15:33:15 by hestela          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -78,7 +78,7 @@ LIBRARY = -lft
 
 LIBNAME = lib/libft.a
 
-WFLAGS = -Werror -Wall -Wextra
+WFLAGS = -Werror -Wall -Wextra -g
 
 all: $(NAME)
 
