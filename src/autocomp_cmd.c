@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/16 03:54:08 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/16 15:28:01 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/19 22:47:08 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -75,7 +75,8 @@ static char		*ft_add_list_3(char **ln, int *ps)
 
 	i = 0;
 	ft_bzero(begin, 1024);
-	while (ln[0][*ps] && !ft_strchr(" ;><&|", ln[0][*ps]))
+	while (ln[0][*ps] && (!ft_strchr(" ;><&|", ln[0][*ps])
+		|| ln[0][*ps - 1] == '\\'))
 	{
 		begin[i] = ln[0][*ps];
 		i++;

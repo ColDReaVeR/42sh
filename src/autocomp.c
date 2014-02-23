@@ -6,9 +6,10 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/14 15:59:09 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/16 04:01:00 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/22 17:53:57 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include <unistd.h>
 #include <stdlib.h>
 #include <dirent.h>
 #include "libft.h"
@@ -48,7 +49,7 @@ static int		ft_iscmd(char *str, int i)
 		nbr = 1;
 		i--;
 	}
-	while (!ft_strchr(";><&|", str[i]) && i >= 0)
+	while (!ft_strchr(";&|", str[i]) && i >= 0)
 	{
 		if (str[i] != ' ' && str[i + 1] == ' ')
 			nbr++;
@@ -76,10 +77,11 @@ static void		ft_file_completion(char **line, int *position, int *autocomp)
 		prev = 1;
 		ft_comp_current_dir(line, position, prevpos, autocomp);
 	}
-	else if (prev == 2 || line[0][prevpos - 1] != ' ')
+	else
 	{
 		prev = 2;
-		while (line[0][*position - 1] != ' ')
+		while (*position > 0
+			&& (line[0][*position - 1] != ' ' || line[0][*position - 2] =='\\'))
 			ft_move_left(position, *line);
 		prevpos = *position;
 		ft_comp_file(line, position, prevpos, autocomp);
@@ -104,7 +106,8 @@ static void		ft_cmd_completion(char **line, int *position, int *autocomp)
 	}
 	else
 	{
-		while (*position > 0 && !ft_strchr(" ;<>&|", line[0][*position - 1]))
+		while (*position > 0 && (!ft_strchr(" ;<>&|", line[0][*position - 1])
+			|| line[0][*position - 2] =='\\'))
 			ft_move_left(position, *line);
 		prevpos = *position;
 		prev = 2;

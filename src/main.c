@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/28 10:08:01 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/18 13:31:55 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/22 17:30:58 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <fcntl.h>
@@ -44,6 +44,7 @@ int				main(void)
 		g_env.in_histo = 0;
 		ft_update_cmd(&str);
 		ft_update_history(str);
+		ft_putendl_fd(str, g_env.histo_fd);
 		ft_do_replacements(&str);
 		list = ft_parser(&str);
 		ft_exec_list(list);
@@ -90,7 +91,7 @@ static void		ft_exec_list(t_cmd *list)
 	{
 		if (list->redir == 0)
 		{
-			av = ft_split_args(list->line);
+			av = ft_split_args(list->line, 0);
 			if (!ft_builtin(av))
 				ft_exec(av, g_env.env);
 			ft_array_str_free(av);
@@ -108,7 +109,7 @@ static void		ft_exec_redir(char *cmd1, char *cmd2, int redir)
 {
 	char		**av1;
 	char		**av2;
-	void		(*f[5])(char**, char**, char**);
+	void		(*f[7])(char**, char**, char**);
 
 	if (ft_is_empty(cmd1) || ft_is_empty(cmd2))
 	{
@@ -120,8 +121,10 @@ static void		ft_exec_redir(char *cmd1, char *cmd2, int redir)
 	f[2] = &ft_exec_left;
 	f[3] = &ft_exec_right_d;
 	f[4] = &ft_exec_left_d;
-	av1 = ft_split_args(cmd1);
-	av2 = ft_split_args(cmd2);
+	f[5] = &ft_exec_and;
+	f[6] = &ft_exec_or;
+	av1 = ft_split_args(cmd1, 0);
+	av2 = ft_split_args(cmd2, 0);
 	f[redir - 1](av1, av2, g_env.env);
 	ft_array_str_free(av1);
 	ft_array_str_free(av2);

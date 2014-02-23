@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/11 00:09:56 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/12 12:26:21 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/22 15:45:14 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -19,10 +19,12 @@
 static void		ft_get_alias_list(void);
 static void		ft_add_node(char *str);
 static void		ft_create_node(char *alias, char *string);
+static void		ft_get_history(void);
 
 void			ft_init(t_term *term)
 {
 	char		buf[1024];
+	char		*histo_path;
 
 	g_env.alias_lst = NULL;
 	g_env.quote_wait = 0;
@@ -40,6 +42,35 @@ void			ft_init(t_term *term)
 	term->c_cc[VMIN] = 1;
 	term->c_cc[VTIME] = 0;
 	tcsetattr(0, 0, term);
+	histo_path = ft_strjoin(ft_getenv(g_env.env, "HOME"), "/.zshrc_history");
+	g_env.histo_fd = open(histo_path, O_CREAT | O_RDWR, 0777);
+	ft_get_history();
+}
+
+static void		ft_get_history(void)
+{
+	char		*str;
+	int			i;
+
+	str = NULL;
+	while (ft_gnl(g_env.histo_fd, &str) > 0)
+	{
+		i = 0;
+		if (str[i] == ':' && str[i + 1] == ' ' && ft_isdigit(str[i + 2]))
+		{
+			while (ft_strncmp(str + i, ":0;", 3) && str + i)
+				i++;
+			if (str + i == '\0')
+				ft_update_history(str);
+			else
+			{
+				i += 3;
+				ft_update_history(str + i);
+			}
+		}
+		else
+			ft_update_history(str);
+	}
 }
 
 static void		ft_get_alias_list(void)

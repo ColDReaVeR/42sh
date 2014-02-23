@@ -6,7 +6,7 @@
 #    By: hestela <hestela@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/01/28 10:07:14 by hestela           #+#    #+#              #
-#    Updated: 2014/02/19 04:54:12 by msommagg         ###   ########.fr        #
+#    Updated: 2014/02/23 00:59:42 by msommagg         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -33,6 +33,7 @@ SOURCES		=	src/main.c \
 				src/suspended_pid_list.c \
 				src/jobs.c \
 				src/parse.c \
+				src/parse_tool.c \
 				src/right.c \
 				src/right_d.c \
 				src/left.c \
@@ -61,7 +62,9 @@ SOURCES		=	src/main.c \
 				src/autocomp_list.c \
 				src/replace_script.c \
 				src/check_position.c \
-				src/export.c
+				src/export.c \
+				src/exec_and_or.c \
+				src/print_history.c
 
 HEADERS		=	inc/
 OBJECTS		=	$(subst src,obj,$(subst .c,.o,$(SOURCES)))

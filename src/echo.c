@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/13 12:48:18 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/19 04:50:31 by msommagg         ###   ########.fr       */
+/*   Updated: 2014/02/23 00:45:26 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <termcap.h>
@@ -20,16 +20,20 @@ int				ft_echo(char **av)
 	int			end;
 	int			i;
 
-	i = 1;
-	end = 1;
-	if (av[i] && av[i][0] == '-' && av[i][1] == 'n')
+	if (av[1])
 	{
-		end = 0;
-		i++;
+		i = 1;
+		end = 1;
+		if (av[i][0] == '-' && av[i][1] == 'n')
+		{
+			end = 0;
+			i++;
+		}
+		ft_print_args(av, i);
+		if (end)
+			ft_putchar('\n');
 	}
-	ft_print_args(av, i);
-	if (end)
-		ft_putchar('\n');
+	g_env.prev_status = 0;
 	return (0);
 }
 
@@ -42,8 +46,12 @@ static void		ft_print_args(char **av, int i)
 		j = 0;
 		while (av[i][j])
 		{
-			if (av[i][j] == '"' || av[i][j] == '\'')
+			if ((av[i][j] == '"' && av[i][j + 1] == '"')
+				|| (av[i][j] == '\'' && av[i][j + 1] == '\''))
+			{
+				j++;
 				ft_putchar(26);
+			}
 			else
 				ft_putchar(av[i][j]);
 			j++;

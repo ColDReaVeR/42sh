@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/04 10:25:54 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/05 14:51:23 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/22 17:19:27 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -32,7 +32,7 @@ t_cmd			*ft_parser(char **line)
 	while (*str)
 	{
 		ft_is_instring(&instring, str);
-		if (!instring && ft_strchr("|<>;", *str))
+		if (!instring && ft_strchr("|<&>;", *str))
 			str += ft_check_redir(&list, str, &ptr);
 		else
 			str++;
@@ -56,19 +56,10 @@ static int		ft_check_redir(t_cmd **alist, char *str, char **ptr)
 	int			redir;
 	int			inc;
 
-	redir = 0;
-	if (*str == '>' && *str == *(str + 1))
-		redir = 4;
-	else if (*str == '<' && *str == *(str + 1))
-		redir = 5;
-	else if (*str == '|')
-		redir = 1;
-	else if (*str == '>')
-		redir = 2;
-	else if (*str == '<')
-		redir = 3;
+	redir = ft_get_redir_id(str);
 	inc = 1;
-	if ((*str == '>' || *str == '<') && *str == *(str + 1))
+	if ((*str == '>' || *str == '<' || *str == '&' || *str == '|')
+		&& *str == *(str + 1))
 	{
 		inc = 2;
 		*(str + 1) = '\0';

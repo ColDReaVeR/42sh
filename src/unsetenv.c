@@ -6,11 +6,12 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 18:32:38 by hestela           #+#    #+#             */
-/*   Updated: 2014/01/29 18:43:19 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/21 14:40:23 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
 #include "libft.h"
+#include "42sh.h"
 
 static char		**ft_unset(char **env, char *var);
 static char		**ft_copyenv(int i, char **env);
@@ -21,7 +22,10 @@ char			**ft_unsetenv(char **av, char **env)
 
 	i = 1;
 	if (av[1] == NULL)
+	{
 		ft_printf_fd(2, "%$unsetenv: Too few arguments.\n%$", F_RED, F_WHITE);
+		g_env.prev_status = 1;
+	}
 	else
 	{
 		while (av[i])
@@ -30,6 +34,7 @@ char			**ft_unsetenv(char **av, char **env)
 			i++;
 		}
 	}
+	g_env.prev_status = 0;
 	return (env);
 }
 

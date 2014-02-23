@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 18:10:49 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/19 04:09:35 by msommagg         ###   ########.fr       */
+/*   Updated: 2014/02/23 00:48:39 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -42,6 +42,10 @@ void			ft_cd(char **av, char **env)
 		ft_path(av, &change);
 	if (change)
 		ft_apply_changes(env);
+	if (ft_array_str_len(av) > 3 || ft_array_str_len(av) > 2 || change == 0)
+		g_env.prev_status = 1;
+	else
+		g_env.prev_status = 0;
 }
 
 static void		ft_option(char **env, int *change)
@@ -90,21 +94,15 @@ static void		ft_apply_changes(char **env)
 {
 	char		**new;
 	char		*value;
-	char		*tmp;
 
 	value = ft_getenv(env, "PWD");
-	tmp = ft_strjoin("* OLDPWD ", value);
-	new = ft_strsplit(tmp, ' ');
-	free(tmp);
+	new = ft_update_pwd(value, 1);
 	ft_setenv(new, env);
 	ft_array_str_free(new);
 	value = getcwd(NULL, 200);
-	tmp = ft_strjoin("* PWD ", value);
-	new = ft_strsplit(tmp, ' ');
-	free(tmp);
+	new = ft_update_pwd(value, 2);
 	ft_setenv(new, env);
 	ft_array_str_free(new);
 	value = NULL;
-	tmp = NULL;
 	new = NULL;
 }

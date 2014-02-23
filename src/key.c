@@ -6,18 +6,20 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 12:35:39 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/16 04:09:05 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/23 00:50:22 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
+#include <termcap.h>
 #include "42sh.h"
 
 static int		ft_getkey(char *str);
-static void		ft_check_key_suite(int key, int *pos, char **line, char *buf);
+static void		ft_check_key_suite(int key, int *pos, char **line);
+static void		ft_ctrl_d(int *pos, char **line);
 
 void			ft_check_key(char *buf, char **line, int *position, int *comp)
 {
-	int				key;
+	int			key;
 
 	key = ft_getkey(buf);
 	if (key == TAB)
@@ -38,10 +40,10 @@ void			ft_check_key(char *buf, char **line, int *position, int *comp)
 		ft_move_to_word_L(position, line);
 	if (key == CTRL_RIGHT)
 		ft_move_to_word_R(position, line);
-	ft_check_key_suite(key, position, line, buf);
+	ft_check_key_suite(key, position, line);
 }
 
-static void		ft_check_key_suite(int key, int *pos, char **line, char *buf)
+static void		ft_check_key_suite(int key, int *pos, char **line)
 {
 	if (key == CTRL_UP)
 		ft_move_up(pos, line);
@@ -57,15 +59,26 @@ static void		ft_check_key_suite(int key, int *pos, char **line, char *buf)
 		ft_move_right(pos, *line);
 	if (key == BACK)
 		ft_back(pos, line);
-	if (key == CTRL_D && !ft_strlen(*line) && g_env.quote_wait == 0)
+	if (key == CTRL_D)
+		ft_ctrl_d(pos, line);
+	if (key == CTRL_C && g_env.in_exec == NULL && g_env.quote_wait == 0)
+		ft_kill(1);
+}
+
+static void		ft_ctrl_d(int *pos, char **line)
+{
+	if (!ft_strlen(*line) && g_env.quote_wait == 0)
 	{
 		ft_putchar('\n');
 		ft_exit(NULL, 0);
 	}
-	else if (key == CTRL_D)
-		*buf = '\n';
-	if (key == CTRL_C && g_env.in_exec == NULL && g_env.quote_wait == 0)
-		ft_kill(1);
+	else if (*pos == (int)ft_strlen(*line))
+		ft_putchar(7);
+	else if (*pos != (int)ft_strlen(*line) && (int)ft_strlen(*line) != 0)
+	{
+		ft_del_char(line, *pos + 1);
+		tputs(tgetstr("dc", NULL), 1, ft_putchar);
+	}
 }
 
 static int		ft_getkey(char *str)

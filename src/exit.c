@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 19:07:43 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/19 04:53:11 by msommagg         ###   ########.fr       */
+/*   Updated: 2014/02/23 00:41:05 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -80,6 +80,8 @@ static void		ft_restore(t_term *term)
 	term->c_lflag |= ECHO;
 	term->c_lflag |= ISIG;
 	tcsetattr(0, 0, term);
+	if (g_env.histo_fd)
+		close(g_env.histo_fd);
 	ft_printf("%$exit\n%$", F_WHITE, C_RESET);
 }
 

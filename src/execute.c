@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 19:22:55 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/18 21:20:23 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/22 16:42:16 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -71,6 +71,7 @@ static void		ft_restore_term_for_exec(char *cmd, int *status)
 	if (ft_strncmp(g_env.in_exec, "emacs", 5) == 0)
 		ft_putstr(C_RESET);
 	waitpid(g_env.thread, status, WUNTRACED);
+	g_env.prev_status = *status % 255;
 	g_env.in_exec = NULL;
 	tcgetattr(0, g_env.term);
 	g_env.term->c_lflag &= ~(ICANON);
@@ -100,7 +101,9 @@ int				ft_builtin(char **av)
 		g_env.env = ft_setenv(av, g_env.env);
 		ft_env_changes();
 	}
-	else if (!ft_builtin_suite(av)) 
+	else if (ft_strcmp_case("history", av[0]) == 0)
+		ft_history(av);
+	else if (!ft_builtin_suite(av))
 		return (0);
 	return (1);
 }
@@ -117,7 +120,7 @@ static int		ft_builtin_suite(char **av)
 	{
 		g_env.env = ft_export(av, g_env.env);
 		ft_env_changes();
-	}		
+	}
 	else if (ft_strcmp_case("unset", av[0]) == 0)
 	{
 		g_env.env = ft_unsetenv(av, g_env.env);

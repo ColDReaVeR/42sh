@@ -6,9 +6,10 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/16 03:56:56 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/19 04:20:29 by msommagg         ###   ########.fr       */
+/*   Updated: 2014/02/23 00:46:24 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include <unistd.h>
 #include <stdlib.h>
 #include <termcap.h>
 #include <dirent.h>
@@ -28,7 +29,7 @@ void			ft_comp_refresh(char **line, char *buf, int *ps, int pv)
 	*ps += ft_putstr(*line);
 	while (*ps != pv)
 		ft_move_left(ps, *line);
-	while (!ft_strchr(" ;|<>&", line[0][*ps]))
+	while (!ft_strchr(" ;|<>&\0", line[0][*ps]) || line[0][*ps - 1] == '\\')
 		ft_move_right(ps, *line);
 }
 
@@ -37,6 +38,8 @@ void			ft_comp_file_3(char **ln, int pv, int *ps, char *path)
 	char		*new;
 
 	new = ft_comp_file_4(ln, pv, path, g_comp_lst->str);
+	if (ft_strchr(path, ' '))
+		ft_rewrite_path(&new, path);
 	ft_refresh_2(ln, ps, pv, new);
 	if (!g_comp_lst->next)
 		g_comp_lst = g_comp_lst->start;
@@ -54,7 +57,7 @@ static char		*ft_comp_file_4(char **ln, int ps, char *path, char *to_add)
 	i[1] = 0;
 	while (i[0] < ps && i[0]++ >= 0 && i[1]++ >= 0)
 		buf[i[0] - 1] = ln[0][i[1] - 1];
-	while (!ft_strchr(" ;|<>&", ln[0][i[1]]))
+	while (!ft_strchr(" ;|<>&\0", ln[0][i[1]] || ln[0][i[1] - 1] == '\\'))
 		i[1]++;
 	if (path)
 	{
@@ -82,7 +85,7 @@ static void		ft_refresh_2(char **ln, int *ps, int pv, char *new)
 	*ps += ft_putstr(*ln);
 	while (*ps != pv)
 		ft_move_left(ps, *ln);
-	while (!ft_strchr(" ;|<>&", ln[0][*ps]))
+	while (!ft_strchr(" ;|<>&\0", ln[0][*ps]) || ln[0][*ps - 1] == '\\')
 		ft_move_right(ps, *ln);
 }
 
@@ -105,7 +108,7 @@ void			ft_comp_path(char **ln, int pv, char *buf)
 		i[2]++;
 		i[0]++;
 	}
-	while (!ft_strchr(" ;><&|", ln[0][i[1]]))
+	while (!ft_strchr(" ;><&|\0", ln[0][i[1]]) || ln[0][i[1] - 1] == '\\')
 		i[1]++;
 	while (ln[0][i[1]])
 	{

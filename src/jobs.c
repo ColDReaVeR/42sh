@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/03 09:21:19 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/18 18:44:36 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/21 14:39:37 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <signal.h>
@@ -23,7 +23,10 @@ void				ft_print_job_list(void)
 	t_pidlst		*start;
 
 	if (!g_env.pid_list)
+	{
 		ft_printf_fd(2, "%$jobs: No suspended jobs%$\n", ERROR_CLR, TEXT_CLR);
+		g_env.prev_status = 1;
+	}
 	else
 	{
 		start = g_env.pid_list->start;
@@ -35,6 +38,7 @@ void				ft_print_job_list(void)
 			g_env.pid_list = g_env.pid_list->next;
 		}
 		g_env.pid_list = start;
+		g_env.prev_status = 0;
 	}
 }
 
@@ -119,6 +123,7 @@ void				ft_resume(char **av)
 	if (!g_env.pid_list)
 	{
 		ft_printf_fd(2, "%$fg: No current job%$\n", ERROR_CLR, C_RESET);
+		g_env.prev_status = 1;
 		return ;
 	}
 	num = ft_got_id(av);
@@ -127,8 +132,10 @@ void				ft_resume(char **av)
 	if (num != 0 && !ft_check_exist_job(num))
 	{
 		ft_printf_fd(2, "%$fg: Job not found: %d%$\n", ERROR_CLR, num, C_RESET);
+		g_env.prev_status = 1;
 		return ;
 	}
+	g_env.prev_status = 0;
 	ft_do_resume(num);
 	signal(SIGINT, SIG_IGN);
 }
