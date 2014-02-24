@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 15:39:58 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/23 21:51:15 by msommagg         ###   ########.fr       */
+/*   Updated: 2014/02/24 19:50:32 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,7 +210,7 @@ void		ft_exec_or(char **av1, char **av2, char **env);
 ** History
 */
 
-void		ft_update_history(char *line);
+void		ft_update_history(char *line, int init);
 void		ft_previous_cmd(int *position, char *line);
 void		ft_next_cmd(int *position, char *line, char *buf);
 

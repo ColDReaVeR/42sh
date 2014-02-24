@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/28 10:08:01 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/24 19:25:18 by msommagg         ###   ########.fr       */
+/*   Updated: 2014/02/24 19:54:02 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <fcntl.h>
@@ -35,7 +35,7 @@ int				main(void)
 			, PROMPT_CLR, ft_getenv(g_env.env, "USER"));
 		g_env.in_histo = 0;
 		ft_update_cmd(str);
-		ft_update_history(str);
+		ft_update_history(str, 0);
 		ft_do_replacements(str);
 		list = ft_parser(str);
 		ft_exec_list(list);

@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 17:16:03 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/23 19:59:18 by msommagg         ###   ########.fr       */
+/*   Updated: 2014/02/24 19:51:27 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -80,12 +80,13 @@ static void		ft_update(char *line)
 	}
 }
 
-void			ft_update_history(char *line)
+void			ft_update_history(char *line, int init)
 {
 	if (*line)
 	{
 		ft_update(line);
-		ft_putendl_fd(line, g_env.histo_fd);
+		if (!init)
+			ft_putendl_fd(line, g_env.histo_fd);
 	}
 	else
 	{

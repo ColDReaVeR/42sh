@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/11 00:09:56 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/23 20:09:19 by msommagg         ###   ########.fr       */
+/*   Updated: 2014/02/24 19:49:53 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <sys/ioctl.h>
@@ -63,15 +63,15 @@ static void		ft_get_history(void)
 			while (ft_strncmp(str + i, ":0;", 3) && str + i)
 				i++;
 			if (str + i == '\0')
-				ft_update_history(str);
+				ft_update_history(str, 1);
 			else
 			{
 				i += 3;
-				ft_update_history(str + i);
+				ft_update_history(str + i, 1);
 			}
 		}
 		else
-			ft_update_history(str);
+			ft_update_history(str, 1);
 	}
 }
 
