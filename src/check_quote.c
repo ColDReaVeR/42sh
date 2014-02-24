@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/05 15:38:35 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/24 19:29:57 by msommagg         ###   ########.fr       */
+/*   Updated: 2014/02/24 19:34:50 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -25,7 +25,7 @@ int					ft_check_quote(char *line)
 
 	list = NULL;
 	quote = '\0';
-	if (*line)
+	if (!*line)
 		return (0);
 	str = line;
 	while (*str)
