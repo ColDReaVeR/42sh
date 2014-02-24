@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 11:46:28 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/22 16:35:04 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/24 13:11:44 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <signal.h>
@@ -44,6 +44,7 @@ static void		ft_read(char **line, int *position, int *autocomp, int ret)
 	char		buf[1024];
 	int			i;
 
+	ft_bzero(buf, 1024);
 	g_env.saved_line = line;
 	while (!ft_strchr(buf, '\n') && ret > 0)
 	{
@@ -53,8 +54,7 @@ static void		ft_read(char **line, int *position, int *autocomp, int ret)
 		if (ft_isprint(*buf))
 		{
 			i = 0;
-			*autocomp = 0;
-			while (buf[i++])
+			while (buf[i++] && (*autocomp = 0) > -1)
 			{
 				ft_putchar(buf[i - 1]);
 				ft_add_char(line, *position, buf[i - 1]);

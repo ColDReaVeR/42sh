@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/28 10:08:01 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/23 15:31:31 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/24 12:49:27 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <fcntl.h>
@@ -50,7 +50,6 @@ static void		ft_update_cmd(char **line)
 {
 	char		*tmp;
 	char		*tmp2;
-
 	while (ft_check_quote(line) || *line == NULL)
 	{
 		if (*line)
