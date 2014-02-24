@@ -1,8 +1,8 @@
-	=================================================================
+        =================================================================
        
-				PROJECT COMPLETE
-				
-	=================================================================
+                               PROJECT COMPLETE
+                    (MAC OSX ONLY... WAIT FOR LINUX VERSION)
+        =================================================================
 
                         LEAD DEVELOPER : ESTELA Hadrien
         OPTIMISATION AND LINUX PORTAGE : SOMMAGGIO Mickael
