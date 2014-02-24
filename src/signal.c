@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/02 22:45:07 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/21 16:18:48 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/24 10:51:45 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <signal.h>
@@ -35,6 +35,12 @@ void			ft_kill(int sig)
 	}
 	else
 	{
+		if (g_env.histo)
+		{
+			while (g_env.histo->next)
+				g_env.histo = g_env.histo->next;
+		}
+		g_env.in_histo = 0;
 		ft_printf("%$\n%s 42sh (%T)%s "\
 			, PROMPT_CLR, ft_getenv(g_env.env, "USER"), "%");
 		free(*g_env.saved_line);

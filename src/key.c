@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 12:35:39 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/23 15:20:25 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/24 10:54:18 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -68,7 +68,10 @@ static void		ft_check_key_suite(int key, int *pos, char **line)
 	if (key == CTRL_D)
 		ft_ctrl_d(pos, line);
 	if (key == CTRL_C && g_env.in_exec == NULL && g_env.quote_wait == 0)
+	{
 		ft_kill(1);
+		*pos = 0;
+	}
 }
 
 static void		ft_ctrl_d(int *pos, char **line)
