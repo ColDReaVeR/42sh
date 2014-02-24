@@ -1,8 +1,19 @@
-	=================================================================
+        =================================================================
        
-				PROJECT COMPLETE
-				
-	=================================================================
+                               PROJECT COMPLETE
+                    (MAC OSX ONLY... WAIT FOR LINUX VERSION)
+        =================================================================
+
+                        LEAD DEVELOPER : ESTELA Hadrien
+        OPTIMISATION AND LINUX PORTAGE : SOMMAGGIO Mickael
+                TESTING & DEVELOPEMENT : DELOUYA Camille
+                                         SCHUCK	Maxime
+
+        =================================================================
+                
+                                    FEATURES
+       
+        =================================================================
 
 edit line commands:
 
@@ -59,3 +70,4 @@ redirections:
 -> environement variables are replaced
 -> verifying permission for complete path (dir by dir)
 -> shell scripts
+-> wait for missing quotes
