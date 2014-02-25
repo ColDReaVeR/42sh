@@ -6,7 +6,7 @@
 #    By: hestela <hestela@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/11/20 08:42:55 by hestela           #+#    #+#              #
-#    Updated: 2014/02/19 00:35:42 by msommagg         ###   ########.fr        #
+#    Updated: 2014/02/25 16:10:30 by msommagg         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -156,19 +156,31 @@ SOURCES	=	ft_atoi.c \
 HEADERS	=	libft.h
 OBJECTS	=	$(subst .c,.o,$(SOURCES))
 
+.SILENT	:
+
 all		:	$(NAME)
 
 $(NAME)	:	$(OBJECTS)
+	printf "\e[32m----------------------------------\e[36m\n"
 	ar rc $(NAME) $(OBJECTS)
 	ranlib $(NAME)
+	printf "\e[32m[✔]\e[36m $@"
+	printf "\n\e[32m----------------------------------\e[36m\n"
 
 %.o		:	%.c
+	printf "\e[32m[✔]\e[36m $@ \n"
 	gcc $(WFLAGS) -c -o $@ $^
 
 clean	:
 	rm -rf $(OBJECTS)
+	printf "\e[31m----------------------------------\n"
+	printf "[✔]\e[36m $(NAME): Objects deleted\n"
+	printf "\e[31m----------------------------------\e[36m\n"
 
 fclean	:	clean
 	rm -rf $(NAME)
+	printf "\e[31m----------------------------------\n"
+	printf "[✔]\e[36m $(NAME): All deleted\n"
+	printf "\e[31m----------------------------------\e[36m\n"
 
 re		:	fclean all
