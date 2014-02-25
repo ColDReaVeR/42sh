@@ -6,7 +6,7 @@
 #    By: hestela <hestela@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/01/28 10:07:14 by hestela           #+#    #+#              #
-#    Updated: 2014/02/25 16:06:57 by msommagg         ###   ########.fr        #
+#    Updated: 2014/02/25 16:26:22 by msommagg         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -81,10 +81,10 @@ export			WFLAGS
 all			:	$(NAME)
 
 $(NAME)		:	$(LIBNAME) $(OBJECTS)
-	printf "\e[32m----------------------------------\e[36m\n"
+	printf "\033[32m----------------------------------\033[36m\n"
 	gcc $(WFLAGS) $(OBJECTS) $(LIBSDIR) $(LIBRARY) -L/usr/lib -ltermcap -o $(NAME)
-	printf "\e[32m[✔]\e[36m $@"
-	printf "\n\e[32m----------------------------------\e[36m\n"
+	printf "\033[32m[✔]\033[36m $@"
+	printf "\n\033[32m----------------------------------\033[36m\n"
 
 $(LIBNAME)	:	./libft
 	make -C ./libft
@@ -92,23 +92,23 @@ $(LIBNAME)	:	./libft
 	cp ./libft/libft.h ./inc
 
 obj/%.o		:	src/%.c
-	printf "\e[32m[✔]\e[36m $@ \n"
+	printf "\033[32m[✔]\033[36m $@ \n"
 	gcc $(WFLAGS) -I $(HEADERS) -c -o $@ $^
 
 clean		:
 	rm -rf $(OBJECTS)
 	make -C ./libft clean
-	printf "\e[31m----------------------------------\n"
-	printf "[✔]\e[36m $(NAME): Objects deleted\n"
-	printf "\e[31m----------------------------------\e[36m\n"
+	printf "\033[31m----------------------------------\n"
+	printf "[✔]\033[36m $(NAME): Objects deleted\n"
+	printf "\033[31m----------------------------------\033[36m\n"
 
 fclean		:	clean
 	rm -rf $(NAME)
 	rm -rf $(LIBNAME)
 	rm -rf ./inc/libft.h
-	printf "\e[31m----------------------------------\n"
-	printf "[✔]\e[36m $(NAME): Objects deleted\n"
-	printf "\e[31m----------------------------------\e[36m\n"
+	printf "\033[31m----------------------------------\n"
+	printf "[✔]\033[36m $(NAME): Objects deleted\n"
+	printf "\033[31m----------------------------------\033[36m\n"
 
 re			:	fclean all
 
