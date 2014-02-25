@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 19:22:55 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/23 17:18:47 by msommagg         ###   ########.fr       */
+/*   Updated: 2014/02/25 01:43:08 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -110,6 +110,8 @@ static int		ft_builtin_suite(char **av)
 		ft_exit(av, 1);
 	else if (ft_strcmp_case("fg", av[0]) == 0)
 		ft_resume(av);
+	else if (ft_strcmp_case("alias", av[0]) == 0)
+		ft_alias(av);
 	else if (ft_strcmp_case("jobs", av[0]) == 0)
 		ft_print_job_list();
 	else if (ft_strcmp_case("export", av[0]) == 0)

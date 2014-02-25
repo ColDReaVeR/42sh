@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 15:39:58 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/24 19:50:32 by msommagg         ###   ########.fr       */
+/*   Updated: 2014/02/25 01:57:40 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,7 @@ char		**ft_update_pwd(char *str, int mode);
 void		ft_exit(char **av, int type);
 void		ft_history(char **av);
 int			ft_echo(char **av);
-int			ft_put(int c);
+void		ft_alias(char **av);
 
 /*
 ** Control jobs
