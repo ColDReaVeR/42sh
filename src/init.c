@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/11 00:09:56 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/24 19:49:53 by msommagg         ###   ########.fr       */
+/*   Updated: 2014/02/25 01:14:04 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <sys/ioctl.h>
@@ -65,34 +65,38 @@ static void		ft_get_history(void)
 			if (str + i == '\0')
 				ft_update_history(str, 1);
 			else
-			{
-				i += 3;
-				ft_update_history(str + i, 1);
-			}
+				ft_update_history(str + i + 3, 1);
 		}
 		else
 			ft_update_history(str, 1);
 	}
+	free(str);
 }
 
 static void		ft_get_alias_list(void)
 {
+	int			i;
 	int			fd;
 	char		*tmp;
 	char		*path;
 
 	tmp = ft_strjoin(ft_getenv(g_env.env, "HOME"), "/");
-	path = ft_strjoin(tmp, ".zshrc");
-	free(tmp);
+	path = ft_strjoin(tmp, ".bashrc");
 	fd = open(path, O_RDONLY);
+	free(path);
+	free(tmp);
 	tmp = NULL;
 	while (ft_gnl(fd, &tmp) > 0)
 	{
-		if (ft_strstr(tmp, "alias"))
-			ft_add_node(tmp);
+		i = 0;
+		while (*(tmp + i) == ' ' || *(tmp + i) == '\t')
+			i++;
+		if (!ft_strncmp(tmp + i, "alias ", 6))
+			ft_add_node(tmp + i);
 	}
 	if (g_env.alias_lst)
 		g_env.alias_lst = g_env.alias_lst->start;
+	free(tmp);
 }
 
 static void		ft_add_node(char *str)
