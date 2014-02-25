@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/28 10:08:01 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/24 19:54:02 by msommagg         ###   ########.fr       */
+/*   Updated: 2014/02/25 15:40:41 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <fcntl.h>
@@ -47,10 +47,12 @@ int				main(void)
 
 static void		ft_update_cmd(char *line)
 {
+	int			bool;
 	char		tmp[ARG_MAX] = {0};
 	char		tmp2[ARG_MAX] = {0};
 
-	while (ft_check_quote(line) || *line == '\0')
+	bool = 0;
+	while (ft_check_quote(line) || !bool)
 	{
 		if (*line)
 			ft_strcpy(tmp, line);
@@ -62,6 +64,7 @@ static void		ft_update_cmd(char *line)
 		ft_strcpy(tmp2, line);
 		ft_strcpy(line, tmp);
 		ft_strcat(line, tmp2);
+		bool = 1;
 	}
 	ft_printf("%$", TEXT_CLR);
 }
