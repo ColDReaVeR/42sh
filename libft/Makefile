@@ -6,7 +6,7 @@
 #    By: hestela <hestela@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/11/20 08:42:55 by hestela           #+#    #+#              #
-#    Updated: 2014/02/25 13:44:19 by hestela          ###   ########.fr        #
+#    Updated: 2014/02/25 13:58:37 by hestela          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -177,8 +177,14 @@ $(NAME): $(OBJECTS)
 
 clean:
 	rm -rf $(OBJECTS)
+	printf "\e[31m----------------------------------\n"
+	printf "[✔]\e[36m $(NAME): Objects deleted\n"
+	printf "\e[31m----------------------------------\e[36m\n"
 
 fclean: clean
 	rm -rf $(NAME)
+	printf "\e[31m----------------------------------\n"
+	printf "[✔]\e[36m $(NAME): All deleted\n"
+	printf "\e[31m----------------------------------\e[36m\n"
 
 re: fclean all
