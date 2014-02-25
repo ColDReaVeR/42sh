@@ -6,7 +6,7 @@
 #    By: hestela <hestela@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/11/20 08:42:55 by hestela           #+#    #+#              #
-#    Updated: 2014/02/14 02:13:01 by hestela          ###   ########.fr        #
+#    Updated: 2014/02/25 13:44:19 by hestela          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -160,13 +160,19 @@ OBJECTS = $(subst .c,.o,$(SOURCES))
 
 WFLAGS = -Wall -Werror -Wextra
 
+.SILENT:
+
 all: $(NAME)
 
 $(NAME): $(OBJECTS)
+	printf "\e[32m----------------------------------\e[36m\n"
 	ar rc $(NAME) $(OBJECTS)
 	ranlib $(NAME)
+	printf "\e[32m[✔]\e[36m $@"
+	printf "\n\e[32m----------------------------------\e[36m\n"
 
 %.o: %.c
+	printf "\e[32m[✔]\e[36m $@ \n"
 	gcc $(WFLAGS) -c -o $@ $^
 
 clean:
