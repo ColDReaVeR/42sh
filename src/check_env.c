@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/08 09:34:22 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/20 13:17:58 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/26 22:22:05 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -17,6 +17,8 @@ static void		ft_check_have_term(char **av);
 static void		ft_check_var1(char **av);
 static void		ft_check_var2(char **av);
 static void		ft_update_shlvl(char **av);
+
+extern char		**environ;
 
 void			ft_check_env(void)
 {
@@ -51,7 +53,8 @@ static void		ft_update_shlvl(char **av)
 	lv = ft_atoi(ft_getenv(g_env.env, "SHLVL"));
 	lv++;
 	ft_strcpy(av[1], "SHLVL");
-	ft_strcpy(av[2], ft_itoa(lv));
+	free(av[2]);
+	av[2] = ft_itoa(lv);
 	ft_builtin(av);
 }
 
@@ -80,7 +83,7 @@ static void		ft_check_have_term(char **av)
 		ft_builtin(av);
 	}
 	if (g_env.path)
-		free(g_env.path);
+		ft_array_str_free(g_env.path);
 	g_env.path = ft_strsplit(ft_getenv(g_env.env, "PATH"), ':');
 }
 
