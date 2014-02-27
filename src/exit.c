@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 19:07:43 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/23 17:15:43 by msommagg         ###   ########.fr       */
+/*   Updated: 2014/02/27 02:32:37 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -70,9 +70,8 @@ static void		ft_restore(void)
 		free(node->string);
 		free(node);
 	}
-	while (*g_env.env)
-		free(*g_env.env++);
 	ft_array_str_free(g_env.path);
+	ft_array_str_free(g_env.env);
 	ft_free_history();
 	if (g_env.cut)
 		free(g_env.cut);
