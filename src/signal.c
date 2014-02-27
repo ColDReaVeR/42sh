@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/02 22:45:07 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/27 15:42:11 by msommagg         ###   ########.fr       */
+/*   Updated: 2014/02/27 15:59:19 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <signal.h>
@@ -17,13 +17,14 @@
 
 void			ft_resize(int sig)
 {
-	sig = SIGWINCH;
-	ioctl(1, TIOCGWINSZ, &g_ws);
+	if (sig)
+		ioctl(1, TIOCGWINSZ, &g_ws);
 }
 
 void			ft_kill(int sig)
 {
-	sig = SIGINT;
+	if (!sig)
+		return ;
 	if (g_env.in_exec)
 	{
 		kill(g_env.thread, SIGKILL);
@@ -50,10 +51,9 @@ void			ft_suspend(int sig)
 {
 	char		cp[2];
 
-	sig = SIGTSTP;
 	cp[0] = 06;
 	cp[1] = 0;
-	if (g_env.in_exec)
+	if (g_env.in_exec && sig)
 	{
 		ft_add_to_pid_list(g_env.thread, g_env.in_exec);
 		ioctl(0, TIOCSTI, cp);
