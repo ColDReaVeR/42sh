@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/27 21:52:24 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/03 23:09:38 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/27 02:00:31 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -78,4 +78,5 @@ static void		ft_copy_array(int nbr, int *size, char **copy, char **array)
 		j = 0;
 		i++;
 	}
+	free(size);
 }
