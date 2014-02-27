@@ -6,7 +6,7 @@
 /*   By: msommagg <msommagg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/25 01:46:28 by msommagg          #+#    #+#             */
-/*   Updated: 2014/02/25 02:27:13 by msommagg         ###   ########.fr       */
+/*   Updated: 2014/02/27 13:52:26 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void			ft_alias(char **av)
 	tmp = g_env.alias_lst;
 	while (tmp && !av[1])
 	{
-		ft_printf("%s=%s\n", tmp->alias, tmp->string);
+		ft_printf("%$%s=%$%s\n", INFOS_CLR, tmp->alias, TEXT_CLR, tmp->string);
 		tmp = tmp->next;
 	}
 	if (av[1])
