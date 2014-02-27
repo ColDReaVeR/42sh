@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/18 19:50:08 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/21 16:20:56 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/27 15:13:08 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -127,6 +127,7 @@ static void		ft_update_value(char **env, char *name, char *value)
 	else
 	{
 		tmp = ft_strjoin(name, "=");
+		free(env[i]);
 		env[i] = ft_strjoin(tmp, value);
 		free(tmp);
 	}

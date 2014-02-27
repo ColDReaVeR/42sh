@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 18:10:49 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/23 00:48:39 by msommagg         ###   ########.fr       */
+/*   Updated: 2014/02/27 15:11:16 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -103,6 +103,7 @@ static void		ft_apply_changes(char **env)
 	new = ft_update_pwd(value, 2);
 	ft_setenv(new, env);
 	ft_array_str_free(new);
+	free(value);
 	value = NULL;
 	new = NULL;
 }

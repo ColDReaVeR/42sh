@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/11 00:00:54 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/18 13:15:47 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/27 14:26:05 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -84,6 +84,8 @@ static int		ft_check_complete_path(char *file)
 	while (path)
 	{
 		ret = ft_check_dir(path, file);
+		if (ret == 0 || ret == 2)
+			free(path);
 		if (ret == 0)
 			return (0);
 		if (ret == 2)

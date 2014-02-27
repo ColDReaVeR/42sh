@@ -6,13 +6,13 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/12 20:34:01 by hestela           #+#    #+#             */
-/*   Updated: 2013/12/13 08:01:44 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/27 14:43:25 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
 #include "libft.h"
 
-char		*ft_dtos(double n, int precision)
+char			*ft_dtos(double n, int precision)
 {
 	char		*str;
 	char		*tmps;
