@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/15 12:35:54 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/05 15:25:48 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/19 04:09:13 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -58,7 +58,8 @@ static void		ft_pipe(char **cmd, char **env, char **av1, char **av2)
 	int			fdes[2];
 
 	thread = -1;
-	pipe(fdes);
+	if (pipe(fdes))
+		return ;
 	thread = fork();
 	if (thread == 0)
 	{

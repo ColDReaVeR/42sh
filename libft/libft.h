@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/20 08:44:19 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/17 19:27:07 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/27 13:32:12 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 /*
 ** Define color constants for text decoration
 */
+
 # define C_RESET "\033[1;0m"
 # define C_BRIGTH "\033[1;1m"
 # define C_DIM "\033[1;2m"
@@ -49,8 +50,9 @@
 /*
 ** Write functions
 */
-int			ft_putchar(char c);
-int			ft_putchar_fd(char c, int fd);
+
+int			ft_putchar(int c);
+int			ft_putchar_fd(int c, int fd);
 int			ft_putstr(char const *s);
 int			ft_putstr_fd(char const *s, int fd);
 int			ft_putnstr(char const *s, size_t n);
@@ -86,6 +88,7 @@ void		ft_flags5fd(const char *form, va_list *ap, int *i, int *count);
 /*
 ** Convertion functions
 */
+
 long		ft_atoi(const char *str);
 char		*ft_itoa(long n);
 long		ft_itob(long n);
@@ -109,6 +112,7 @@ char		*ft_current_time_to_str(void);
 /*
 ** Maths functions
 */
+
 # define PI 3.14159265358979323846264338327950288
 # define RAD(x) x / 57.2957795
 # define DEG(x) x * 0.0174532925
@@ -121,6 +125,7 @@ int			ft_factorial(int nb);
 /*
 ** Strings compare functions
 */
+
 int			ft_strcmp(const char *s1, const char *s2);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 int			ft_strcmp_case(const char *s1, const char *s2);
@@ -134,6 +139,7 @@ int			ft_match(char *s1, char *s2);
 /*
 ** Memory functions
 */
+
 void		ft_bzero(void *s, size_t n);
 void		*ft_memset(void *b, int c, size_t len);
 void		*ft_memcpy(void *s1, const void *s2, size_t n);
@@ -147,6 +153,7 @@ void		*ft_memalloc(size_t size);
 /*
 ** String Case functions
 */
+
 int			ft_tolower(int c);
 int			ft_toupper(int c);
 int			ft_isalpha(int c);
@@ -162,6 +169,7 @@ char		*ft_strrev(char *str);
 /*
 ** General strings functions
 */
+
 char		*ft_strcpy(char *s1, const char *s2);
 char		*ft_strncpy(char *s1, const char *s2, size_t n);
 char		*ft_strcat(char *s1, const char *s2);
@@ -190,6 +198,7 @@ char		**ft_strsplit(char const *s, char c);
 /*
 ** Array int functions
 */
+
 double		ft_array_int_sum(int *array, size_t size);
 int			ft_array_int_max(int *array, size_t size);
 int			ft_array_int_min(int *array, size_t size);
@@ -201,6 +210,7 @@ void		ft_array_int_print(int *array, size_t size);
 /*
 ** Array strings functions
 */
+
 void		ft_array_str_sort(char **array);
 void		ft_array_str_sort_case(char **array);
 void		ft_array_str_rsort(char **array);
@@ -215,6 +225,7 @@ void		ft_array_str_iter(char **array, char *(*f)(char *));
 /*
 ** List functions
 */
+
 typedef struct			s_list
 {
 	void				*content;
@@ -242,6 +253,7 @@ t_list		*ft_lstdel_contain(t_list *list, char *str);
 /*
 ** Get Next line
 */
+
 # define BUFF_SIZE 1024
 
 typedef struct			s_gnl

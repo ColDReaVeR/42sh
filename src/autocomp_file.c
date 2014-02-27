@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/16 03:50:46 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/21 16:13:09 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/23 20:37:43 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -14,10 +14,10 @@
 #include "libft.h"
 #include "42sh.h"
 
-static char		*ft_add_list_2(char **ln, int *ps);
+static char		*ft_add_list_2(char *ln, int *ps);
 static char		*ft_comp_file_2(char *beg);
 
-void			ft_comp_current_dir(char **ln, int *ps, int pv, int *comp)
+void			ft_comp_current_dir(char *ln, int *ps, int pv, int *comp)
 {
 	char		buf[2048];
 
@@ -41,7 +41,7 @@ void			ft_comp_current_dir(char **ln, int *ps, int pv, int *comp)
 	}
 }
 
-void			ft_comp_file(char **ln, int *ps, int pv, int *comp)
+void			ft_comp_file(char *ln, int *ps, int pv, int *comp)
 {
 	static char		*path;
 
@@ -92,7 +92,7 @@ char			*ft_autocomp_esc_space(char *str, t_stat file_stats)
 	return (ft_strdup(buf));
 }
 
-static char		*ft_add_list_2(char **ln, int *ps)
+static char		*ft_add_list_2(char *ln, int *ps)
 {
 	char		begin[1024];
 	int			i;
@@ -100,12 +100,12 @@ static char		*ft_add_list_2(char **ln, int *ps)
 
 	i = 0;
 	ft_bzero(begin, 1024);
-	while (ln[0][*ps] && (!ft_strchr(" ;><&|\0", ln[0][*ps])
-		|| ln[0][*ps - 1] == '\\'))
+	while (ln[*ps] && (!ft_strchr(" ;><&|\0", ln[*ps])
+		|| ln[*ps - 1] == '\\'))
 	{
-		begin[i] = ln[0][*ps];
+		begin[i] = ln[*ps];
 		i++;
-		ft_move_right(ps, *ln);
+		ft_move_right(ps, ln);
 	}
 	path = ft_comp_file_2(begin);
 	return (path);

@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/11 22:56:55 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/21 14:15:58 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/23 20:20:31 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -17,7 +17,7 @@ static char		*ft_get_var(char *s);
 static int		ft_cat_var(char *str, int *i, char *buf);
 static void		ft_instring(char *quote, char c, char d);
 
-void			ft_replace_variable(char **line)
+void			ft_replace_variable(char *line)
 {
 	char		buf[2048];
 	char		*str;
@@ -25,7 +25,7 @@ void			ft_replace_variable(char **line)
 	char		quote;
 
 	quote = '\0';
-	str = *line;
+	str = line;
 	i = 0;
 	while (*str)
 	{
@@ -40,8 +40,7 @@ void			ft_replace_variable(char **line)
 		}
 	}
 	buf[i] = '\0';
-	free(*line);
-	*line = ft_strdup(buf);
+	ft_strcpy(line, buf);
 }
 
 static void		ft_instring(char *quote, char c, char d)

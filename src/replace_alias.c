@@ -6,19 +6,19 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/13 00:50:53 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/16 21:11:39 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/23 20:28:14 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
 #include "libft.h"
 #include "42sh.h"
 
-static void		ft_check_alias(char **line, char *alias, char *string, int i);
+static void		ft_check_alias(char *line, char *alias, char *string, int i);
 static void		ft_instring(char *quote, char c, int d);
 static void		ft_copy_alias(char *buf, char *string, int *i);
-static void		ft_free_and_dup(char **line, char *buf, int i);
+static void		ft_free_and_dup(char *line, char *buf, int i);
 
-void			ft_replace_alias(char **line)
+void			ft_replace_alias(char *line)
 {
 	t_alias_lst		*start;
 	char			*alias;
@@ -40,14 +40,11 @@ void			ft_replace_alias(char **line)
 	}
 }
 
-static void		ft_free_and_dup(char **line, char *buf, int i)
+static void		ft_free_and_dup(char *line, char *buf, int i)
 {
 	buf[i] = '\0';
-	if (ft_strlen(*line) != ft_strlen(buf))
-	{
-		free(*line);
-		*line = ft_strdup(buf);
-	}
+	if (ft_strlen(line) != ft_strlen(buf))
+		ft_strcpy(line, buf);
 }
 
 static void		ft_copy_alias(char *buf, char *string, int *i)
@@ -60,20 +57,22 @@ static void		ft_copy_alias(char *buf, char *string, int *i)
 	}
 }
 
-static void		ft_check_alias(char **line, char *alias, char *string, int i)
+static void		ft_check_alias(char *line, char *alias, char *string, int i)
 {
+	int			strl;
 	char		buf[10240];
 	char		*str;
 	char		quote;
 
-	str = *line;
+	str = line;
+	strl = ft_strlen(line);
 	ft_bzero(buf, 10240);
 	quote = '\0';
 	while (*str)
 	{
 		ft_instring(&quote, *str, *(str - 1));
 		if (ft_strncmp(alias, str, ft_strlen(alias)) == 0 && quote == '\0'
-			&& (ft_strchr(" >|<;\"'`", *(str - 1)) || str == *line)
+			&& (ft_strchr(" >|<;\"'`", *(str - 1)) || strl--)
 			&& ft_strchr(" >|<;\"'`\0", *(str + ft_strlen(alias))))
 		{
 			ft_copy_alias(buf, string, &i);

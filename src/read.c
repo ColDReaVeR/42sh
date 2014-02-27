@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 11:46:28 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/24 13:11:44 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/24 19:27:48 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <signal.h>
@@ -17,9 +17,9 @@
 #include "libft.h"
 #include "42sh.h"
 
-static void		ft_read(char **line, int *position, int *autocomp, int ret);
+static void		ft_read(char *line, int *position, int *autocomp, int ret);
 
-void			ft_get_input(char **line)
+void			ft_get_input(char *line)
 {
 	int				position;
 	static int		autocomp;
@@ -28,42 +28,36 @@ void			ft_get_input(char **line)
 	signal(SIGTSTP, ft_suspend);
 	position = 0;
 	if (*line)
-	{
-		free(*line);
-		*line = NULL;
-	}
-	*line = ft_strdup("\0");
+		ft_bzero(line, ft_strlen(line));
+	ft_strcpy(line, "\0");
 	ft_read(line, &position, &autocomp, 1);
-	while (position < (int)ft_strlen(*line))
-		ft_move_right(&position, *line);
+	while (position < (int)ft_strlen(line))
+		ft_move_right(&position, line);
 	ft_putchar('\n');
 }
 
-static void		ft_read(char **line, int *position, int *autocomp, int ret)
+static void		ft_read(char *line, int *position, int *autocomp, int ret)
 {
-	char		buf[1024];
+	char		buf[ARG_MAX] = {0};
 	int			i;
 
-	ft_bzero(buf, 1024);
-	g_env.saved_line = line;
-	while (!ft_strchr(buf, '\n') && ret > 0)
+	while (((ret = read(0, buf, ARG_MAX))) > 0)
 	{
-		ft_bzero(buf, 1024);
-		ret = read(0, buf, 1024);
 		buf[ret] = '\0';
 		if (ft_isprint(*buf))
 		{
 			i = 0;
+			ft_putstr(&buf[i]);
 			while (buf[i++] && (*autocomp = 0) > -1)
 			{
-				ft_putchar(buf[i - 1]);
-				ft_add_char(line, *position, buf[i - 1]);
-				(*position)++;
+				ft_add_char(line, (*position)++, buf[i - 1]);
 				if ((*position + g_prompt_len + 1) % g_ws.ws_col == 1)
-					tputs(tgetstr("sf", NULL), 1, ft_put);
+					tputs(tgetstr("sf", NULL), 1, ft_putchar);
 			}
 		}
 		else if (*buf != '\n')
 			ft_check_key(buf, line, position, autocomp);
+		else
+			break ;
 	}
 }

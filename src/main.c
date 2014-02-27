@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/28 10:08:01 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/24 12:49:27 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/25 15:40:41 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <fcntl.h>
@@ -15,61 +15,56 @@
 #include "libft.h"
 #include "42sh.h"
 
-static void		ft_update_cmd(char **line);
+static void		ft_update_cmd(char *line);
 static void		ft_exec_list(t_cmd *list);
 static void		ft_exec_redir(char *cmd1, char *cmd2, int redir);
 static void		ft_del_list(t_cmd *list);
 
 int				main(void)
 {
-	char		*str;
+	char		str[ARG_MAX] = {0};
 	t_cmd		*list;
 
 	ft_check_env();
-	str = NULL;
 	list = NULL;
-	g_env.term = malloc(sizeof(t_term));
-	ft_init(g_env.term);
+	ft_init();
 	while (1)
 	{
 		ft_check_position();
 		g_prompt_len = ft_printf("%$%s 42sh (%T)%% "\
 			, PROMPT_CLR, ft_getenv(g_env.env, "USER"));
 		g_env.in_histo = 0;
-		ft_update_cmd(&str);
-		ft_update_history(str);
-		ft_do_replacements(&str);
-		list = ft_parser(&str);
+		ft_update_cmd(str);
+		ft_update_history(str, 0);
+		ft_do_replacements(str);
+		list = ft_parser(str);
 		ft_exec_list(list);
 		ft_del_list(list);
+		ft_bzero(str, ft_strlen(str));
 	}
 	return (0);
 }
 
-static void		ft_update_cmd(char **line)
+static void		ft_update_cmd(char *line)
 {
-	char		*tmp;
-	char		*tmp2;
-	while (ft_check_quote(line) || *line == NULL)
+	int			bool;
+	char		tmp[ARG_MAX] = {0};
+	char		tmp2[ARG_MAX] = {0};
+
+	bool = 0;
+	while (ft_check_quote(line) || !bool)
 	{
 		if (*line)
-			tmp = ft_strdup(*line);
+			ft_strcpy(tmp, line);
 		else
-			tmp = ft_strdup('\0');
+			ft_bzero(tmp, ft_strlen(tmp));
 		if (*tmp)
-		{
-			tmp2 = ft_strjoin(tmp, "\n");
-			free(tmp);
-			tmp = ft_strdup(tmp2);
-			free(tmp2);
-		}
+			ft_strcat(tmp, "\n");
 		ft_get_input(line);
-		tmp2 = ft_strdup(*line);
-		if (*line)
-			free(*line);
-		*line = ft_strjoin(tmp, tmp2);
-		free(tmp);
-		free(tmp2);
+		ft_strcpy(tmp2, line);
+		ft_strcpy(line, tmp);
+		ft_strcat(line, tmp2);
+		bool = 1;
 	}
 	ft_printf("%$", TEXT_CLR);
 }

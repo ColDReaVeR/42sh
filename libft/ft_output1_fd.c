@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/16 21:21:31 by hestela           #+#    #+#             */
-/*   Updated: 2014/01/04 14:53:24 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/19 03:27:27 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdarg.h>
@@ -80,6 +80,7 @@ static void		ft_opt3(const char *form, va_list *ap, int *i, int *count)
 {
 	char		*str;
 
+	str = NULL;
 	if (ft_strchr("lzh", form[*i]) && form[*i + 1] == 'o')
 		*count += ft_putnbr_fd(ft_itoo(va_arg(*ap, long)), g_fd);
 	else if (form[*i] == 'l' && form[*i + 1] == 'f')

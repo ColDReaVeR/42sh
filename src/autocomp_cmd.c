@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/16 03:54:08 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/19 22:47:08 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/23 20:39:10 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -14,11 +14,11 @@
 #include "libft.h"
 #include "42sh.h"
 
-static char		*ft_add_list_3(char **ln, int *ps);
+static char		*ft_add_list_3(char *ln, int *ps);
 static char		*ft_comp_cmd_2(char *beg);
 static void		ft_add_all_cmd_list(char *to_comp);
 
-void			ft_complete_all_cmd(char **line, int *ps, int pv, int *autocomp)
+void			ft_complete_all_cmd(char *line, int *ps, int pv, int *autocomp)
 {
 	char		buf[10240];
 	char		*path;
@@ -45,7 +45,7 @@ void			ft_complete_all_cmd(char **line, int *ps, int pv, int *autocomp)
 	(*autocomp)++;
 }
 
-void			ft_comp_cmd(char **ln, int *ps, int pv, int *comp)
+void			ft_comp_cmd(char *ln, int *ps, int pv, int *comp)
 {
 	static char		*path;
 
@@ -67,7 +67,7 @@ void			ft_comp_cmd(char **ln, int *ps, int pv, int *comp)
 	}
 }
 
-static char		*ft_add_list_3(char **ln, int *ps)
+static char		*ft_add_list_3(char *ln, int *ps)
 {
 	char		begin[1024];
 	int			i;
@@ -75,12 +75,12 @@ static char		*ft_add_list_3(char **ln, int *ps)
 
 	i = 0;
 	ft_bzero(begin, 1024);
-	while (ln[0][*ps] && (!ft_strchr(" ;><&|", ln[0][*ps])
-		|| ln[0][*ps - 1] == '\\'))
+	while (ln[*ps] && (!ft_strchr(" ;><&|", ln[*ps])
+		|| ln[*ps - 1] == '\\'))
 	{
-		begin[i] = ln[0][*ps];
+		begin[i] = ln[*ps];
 		i++;
-		ft_move_right(ps, *ln);
+		ft_move_right(ps, ln);
 	}
 	path = ft_comp_cmd_2(begin);
 	return (path);

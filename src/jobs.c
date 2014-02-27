@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/03 09:21:19 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/21 14:39:37 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/23 17:22:02 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <signal.h>
@@ -93,11 +93,9 @@ static void			ft_do_resume(int num)
 {
 	int				status;
 
-	g_env.term->c_lflag |= ICANON;
-	g_env.term->c_lflag |= ECHO;
-	g_env.term->c_lflag |= ISIG;
+	g_env.term.c_lflag |= (ICANON | ECHO | ISIG);
 	signal(SIGINT, ft_kill);
-	tcsetattr(0, 0, g_env.term);
+	tcsetattr(0, 0, &g_env.term);
 	ft_got_pid_node(num);
 	ft_printf("%$42sh: Resume > %s%$\n", INFOS_CLR, g_env.in_exec, TEXT_CLR);
 	if (ft_strncmp(g_env.in_exec, "emacs", 5) == 0)
@@ -107,13 +105,11 @@ static void			ft_do_resume(int num)
 	if (status == 0)
 		ft_got_node_nbr();
 	g_env.in_exec = NULL;
-	tcgetattr(0, g_env.term);
-	g_env.term->c_lflag &= ~(ICANON);
-	g_env.term->c_lflag &= ~(ECHO);
-	g_env.term->c_lflag &= ~(ISIG);
-	g_env.term->c_cc[VMIN] = 1;
-	g_env.term->c_cc[VTIME] = 0;
-	tcsetattr(0, 0, g_env.term);
+	tcgetattr(0, &g_env.term);
+	g_env.term.c_lflag &= ~(ICANON | ECHO | ISIG);
+	g_env.term.c_cc[VMIN] = 1;
+	g_env.term.c_cc[VTIME] = 0;
+	tcsetattr(0, 0, &g_env.term);
 }
 
 void				ft_resume(char **av)

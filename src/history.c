@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 17:16:03 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/23 15:34:58 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/27 12:59:06 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -14,7 +14,7 @@
 #include "libft.h"
 #include "42sh.h"
 
-void			ft_previous_cmd(int *position, char **line)
+void			ft_previous_cmd(int *position, char *line)
 {
 	if (!g_env.histo || !g_env.histo->prev)
 	{
@@ -23,17 +23,15 @@ void			ft_previous_cmd(int *position, char **line)
 	}
 	g_env.in_histo = 1;
 	while (*position > 0)
-		ft_move_left(position, *line);
-	tputs(tgetstr("cd", NULL), 1, ft_put);
-	if (*line)
-		free(*line);
+		ft_move_left(position, line);
+	tputs(tgetstr("cd", NULL), 1, ft_putchar);
 	g_env.histo = g_env.histo->prev;
-	*line = ft_strdup(g_env.histo->line);
-	ft_putstr(*line);
-	*position += (int)ft_strlen(*line);
+	ft_strcpy(line, g_env.histo->line);
+	ft_putstr(line);
+	*position += (int)ft_strlen(line);
 }
 
-void			ft_next_cmd(int *position, char **line, char *buf)
+void			ft_next_cmd(int *position, char *line, char *buf)
 {
 	if (!g_env.histo || !g_env.histo->next)
 	{
@@ -42,17 +40,17 @@ void			ft_next_cmd(int *position, char **line, char *buf)
 		return ;
 	}
 	while (*position > 0)
-		ft_move_left(position, *line);
-	tputs(tgetstr("cd", NULL), 1, ft_put);
-	if (*line)
-	free(*line);
+		ft_move_left(position, line);
+	tputs(tgetstr("cd", NULL), 1, ft_putchar);
 	g_env.histo = g_env.histo->next;
+	if (!g_env.histo->next)
+		g_env.in_histo = 0;
 	if (g_env.histo->line)
-		*line = ft_strdup(g_env.histo->line);
+		ft_strcpy(line, g_env.histo->line);
 	else
-		*line = ft_strdup(buf);
-	ft_putstr(*line);
-	*position += (int)ft_strlen(*line);
+		ft_strcpy(line, buf);
+	ft_putstr(line);
+	*position += (int)ft_strlen(line);
 }
 
 static void		ft_update(char *line)
@@ -84,12 +82,13 @@ static void		ft_update(char *line)
 	}
 }
 
-void			ft_update_history(char *line)
+void			ft_update_history(char *line, int init)
 {
 	if (*line)
 	{
 		ft_update(line);
-		ft_putendl_fd(line, g_env.histo_fd);
+		if (!init)
+			ft_putendl_fd(line, g_env.histo_fd);
 	}
 	else
 	{

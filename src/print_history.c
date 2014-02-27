@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/22 17:03:49 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/22 17:27:58 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/24 19:59:33 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -57,7 +57,7 @@ static int		ft_list_len(t_histo *list)
 
 static void		ft_print_history(t_histo *list)
 {
-	while (list)
+	while (list->next)
 	{
 		ft_putendl(list->line);
 		list = list->next;

@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/11 00:09:56 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/23 15:09:21 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/27 12:44:27 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <sys/ioctl.h>
@@ -22,10 +22,10 @@ static void		ft_add_node(char *str);
 static void		ft_create_node(char *alias, char *string);
 static void		ft_get_history(void);
 
-void			ft_init(t_term *term)
+void			ft_init(void)
 {
 	char		buf[1024];
-	char		*histo_path;
+	char		histo_path[1024] = {0};
 
 	ioctl(1, TIOCGWINSZ, &g_ws);
 	signal(SIGWINCH, ft_resize);
@@ -38,14 +38,13 @@ void			ft_init(t_term *term)
 	ft_get_alias_list();
 	if (tgetent(buf, ft_getenv(g_env.env, "TERM")) == -1)
 		exit(EXIT_FAILURE);
-	tcgetattr(0, term);
-	term->c_lflag &= ~(ICANON);
-	term->c_lflag &= ~(ECHO);
-	term->c_lflag &= ~(ISIG);
-	term->c_cc[VMIN] = 1;
-	term->c_cc[VTIME] = 0;
-	tcsetattr(0, 0, term);
-	histo_path = ft_strjoin(ft_getenv(g_env.env, "HOME"), "/.zshrc_history");
+	tcgetattr(0, &g_env.term);
+	g_env.term.c_lflag &= ~(ICANON | ECHO | ISIG);
+	g_env.term.c_cc[VMIN] = 1;
+	g_env.term.c_cc[VTIME] = 0;
+	tcsetattr(0, 0, &g_env.term);
+	ft_strcpy(histo_path, ft_getenv(g_env.env, "HOME"));
+	ft_strcat(histo_path, "/.zshrc_history");
 	g_env.histo_fd = open(histo_path, O_CREAT | O_RDWR, 0777);
 	ft_get_history();
 }
@@ -64,16 +63,14 @@ static void		ft_get_history(void)
 			while (ft_strncmp(str + i, ":0;", 3) && str + i)
 				i++;
 			if (str + i == '\0')
-				ft_update_history(str);
+				ft_update_history(str, 1);
 			else
-			{
-				i += 3;
-				ft_update_history(str + i);
-			}
+				ft_update_history(str + i + 3, 1);
 		}
 		else
-			ft_update_history(str);
+			ft_update_history(str, 1);
 	}
+	free(str);
 }
 
 static void		ft_get_alias_list(void)
@@ -81,7 +78,7 @@ static void		ft_get_alias_list(void)
 	int			fd;
 	char		*tmp;
 	char		*path;
-
+	
 	tmp = ft_strjoin(ft_getenv(g_env.env, "HOME"), "/");
 	path = ft_strjoin(tmp, ".zshrc");
 	free(tmp);

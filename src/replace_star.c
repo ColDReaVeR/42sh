@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/13 16:02:35 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/18 01:39:20 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/23 20:30:32 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -14,11 +14,11 @@
 #include "libft.h"
 #include "42sh.h"
 
-static void		ft_find_star(char **line, int i, char *stared, char *path);
+static void		ft_find_star(char *line, int i, char *stared, char *path);
 static char		*ft_get_path(char *str, int i, int *j);
 static char		*ft_get_stared(char *str, int *j);
 
-void			ft_replace_star(char **line)
+void			ft_replace_star(char *line)
 {
 	char		*str;
 	char		quote;
@@ -28,7 +28,7 @@ void			ft_replace_star(char **line)
 
 	i = 0;
 	quote = '\0';
-	str = *line;
+	str = line;
 	while (str[i])
 	{
 		ft_in_string(&quote, str[i], str[i - 1]);
@@ -41,30 +41,30 @@ void			ft_replace_star(char **line)
 				free(path);
 			if (stared)
 				free(stared);
-			str = *line;
+			str = line;
 		}
 		i++;
 	}
 }
 
-static void		ft_find_star(char **line, int i, char *stared, char *path)
+static void		ft_find_star(char *line, int i, char *stared, char *path)
 {
 	int			j;
 	char		*new;
 
 	j = i;
-	while (!ft_strchr(" ;><&|", line[0][j]) && j >= 0)
+	while (!ft_strchr(" ;><&|", line[j]) && j >= 0)
 		j--;
 	j++;
-	path = ft_get_path(*line, i, &j);
-	stared = ft_get_stared(*line, &j);
+	path = ft_get_path(line, i, &j);
+	stared = ft_get_stared(line, &j);
 	if (path && access(path, F_OK) != 0)
 	{
 		ft_printf_fd(2, "%$42sh: No matches found: %s%s%$\n"\
 			, F_RED, path, stared, F_WHITE);
 		return ;
 	}
-	new = ft_replace_star_2(path, stared, &j, *line);
+	new = ft_replace_star_2(path, stared, &j, line);
 	if (!new)
 	{
 		ft_printf_fd(2, "%$42sh: No matches found: %s%s%$\n"\

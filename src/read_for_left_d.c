@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/05 13:51:19 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/07 18:11:09 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/23 20:11:01 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -16,27 +16,23 @@
 #include "42sh.h"
 
 static int		ft_get_key(char *str);
-static void		ft_key(char *buf, char **line, int *position);
-static void		ft_read_input(char **line, int *position);
+static void		ft_key(char *buf, char *line, int *position);
+static void		ft_read_input(char *line, int *position);
 
-void			ft_get_heredoc(char **line)
+void			ft_get_heredoc(char *line)
 {
 	char		*str;
 	int			position;
 
 	position = 0;
-	if (*line)
-	{
-		free(*line);
-		*line = NULL;
-	}
 	str = ft_strdup("\0");
-	ft_read_input(&str, &position);
+	ft_read_input(str, &position);
 	ft_putchar('\n');
-	*line = str;
+	ft_strcpy(line, str);
+	free(str);
 }
 
-static void		ft_read_input(char **line, int *position)
+static void		ft_read_input(char *line, int *position)
 {
 	int			ret;
 	char		*buf;
@@ -45,7 +41,7 @@ static void		ft_read_input(char **line, int *position)
 	buf = ft_memalloc(42);
 	while (!ft_strchr(buf, '\n') && ret > 0)
 	{
-		g_env.saved_line = line;
+//		g_env.saved_line = line;
 		ft_bzero(buf, 42);
 		ret = read(0, buf, 1024);
 		buf[ret] = '\0';
@@ -56,7 +52,7 @@ static void		ft_read_input(char **line, int *position)
 			(*position)++;
 			ft_bzero(buf, 42);
 			if ((*position + g_prompt_len + 1) % g_ws.ws_col == 1)
-				tputs(tgetstr("sf", NULL), 1, ft_put);
+				tputs(tgetstr("sf", NULL), 1, ft_putchar);
 		}
 		else if (*buf != '\n')
 			ft_key(buf, line, position);
@@ -64,7 +60,7 @@ static void		ft_read_input(char **line, int *position)
 	free(buf);
 }
 
-static void		ft_key(char *buf, char **line, int *position)
+static void		ft_key(char *buf, char *line, int *position)
 {
 	int			key;
 
@@ -80,13 +76,13 @@ static void		ft_key(char *buf, char **line, int *position)
 	if (key == CTRL_RIGHT)
 		ft_move_to_word_R(position, line);
 	if (key == CTRL_A || key == HOME)
-		ft_move_to_beg(position, *line);
+		ft_move_to_beg(position, line);
 	if (key == CTRL_E || key == END)
-		ft_move_to_end(position, *line);
+		ft_move_to_end(position, line);
 	if (key == LEFT)
-		ft_move_left(position, *line);
+		ft_move_left(position, line);
 	if (key == RIGHT)
-		ft_move_right(position, *line);
+		ft_move_right(position, line);
 	if (key == BACK)
 		ft_back(position, line);
 	if (key == CTRL_D || key == CTRL_C)

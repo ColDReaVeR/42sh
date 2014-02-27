@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/16 03:56:56 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/21 10:12:21 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/23 20:43:14 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -16,30 +16,29 @@
 #include "libft.h"
 #include "42sh.h"
 
-static char		*ft_comp_file_4(char **ln, int ps, char *path, char *to_add);
-static void		ft_refresh_2(char **ln, int *ps, int pv, char *new);
+static char		*ft_comp_file_4(char *ln, int ps, char *path, char *to_add);
+static void		ft_refresh_2(char *ln, int *ps, int pv, char *new);
 
-void			ft_comp_refresh(char **line, char *buf, int *ps, int pv)
+void			ft_comp_refresh(char *line, char *buf, int *ps, int pv)
 {
 	while (*ps > 0)
-		ft_move_left(ps, *line);
-	tputs(tgetstr("cd", NULL), 1, ft_put);
-	free(*line);
-	*line = ft_strdup(buf);
-	*ps += ft_putstr(*line);
+		ft_move_left(ps, line);
+	tputs(tgetstr("cd", NULL), 1, ft_putchar);
+	ft_strcpy(line, buf);
+	*ps += ft_putstr(line);
 	while (*ps != pv)
-		ft_move_left(ps, *line);
-	while (!ft_strchr(" ;|<>&\0", line[0][*ps]) || line[0][*ps - 1] == '\\')
-		ft_move_right(ps, *line);
+		ft_move_left(ps, line);
+	while (!ft_strchr(" ;|<>&\0", line[*ps]) || line[*ps - 1] == '\\')
+		ft_move_right(ps, line);
 }
 
-void			ft_comp_file_3(char **ln, int pv, int *ps, char *path)
+void			ft_comp_file_3(char *ln, int pv, int *ps, char *path)
 {
 	char		*new;
 
 	new = ft_comp_file_4(ln, pv, path, g_comp_lst->str);
 	if (ft_strchr(path, ' '))
-		ft_rewrite_path(&new, path);
+		ft_rewrite_path(new, path);
 	ft_refresh_2(ln, ps, pv, new);
 	if (!g_comp_lst->next)
 		g_comp_lst = g_comp_lst->start;
@@ -47,7 +46,7 @@ void			ft_comp_file_3(char **ln, int pv, int *ps, char *path)
 		g_comp_lst = g_comp_lst->next;
 }
 
-static char		*ft_comp_file_4(char **ln, int ps, char *path, char *to_add)
+static char		*ft_comp_file_4(char *ln, int ps, char *path, char *to_add)
 {
 	char		buf[2048];
 	int			i[2];
@@ -56,8 +55,8 @@ static char		*ft_comp_file_4(char **ln, int ps, char *path, char *to_add)
 	i[0] = 0;
 	i[1] = 0;
 	while (i[0] < ps && i[0]++ >= 0 && i[1]++ >= 0)
-		buf[i[0] - 1] = ln[0][i[1] - 1];
-	while (!ft_strchr(" ;|<>&\0", ln[0][i[1]] || ln[0][i[1] - 1] == '\\'))
+		buf[i[0] - 1] = ln[i[1] - 1];
+	while (!ft_strchr(" ;|<>&\0", ln[i[1]] || ln[i[1] - 1] == '\\'))
 		i[1]++;
 	if (path)
 	{
@@ -69,27 +68,26 @@ static char		*ft_comp_file_4(char **ln, int ps, char *path, char *to_add)
 	}
 	while (*to_add && i[0]++ >= 0 && to_add++)
 		buf[i[0] - 1] = *(to_add - 1);
-	while (ln[0][i[1]] && i[0]++ >= 0 && i[1]++ >= 0)
-		buf[i[0] - 1] = ln[0][i[1] - 1];
+	while (ln[i[1]] && i[0]++ >= 0 && i[1]++ >= 0)
+		buf[i[0] - 1] = ln[i[1] - 1];
 	return (ft_strdup(buf));
 }
 
-static void		ft_refresh_2(char **ln, int *ps, int pv, char *new)
+static void		ft_refresh_2(char *ln, int *ps, int pv, char *new)
 {
 	while (*ps > 0)
-		ft_move_left(ps, *ln);
-	tputs(tgetstr("cd", NULL), 1, ft_put);
-	free(*ln);
-	*ln = ft_strdup(new);
+		ft_move_left(ps, ln);
+	tputs(tgetstr("cd", NULL), 1, ft_putchar);
+	ft_strcpy(ln, new);
 	free(new);
-	*ps += ft_putstr(*ln);
+	*ps += ft_putstr(ln);
 	while (*ps != pv)
-		ft_move_left(ps, *ln);
-	while (!ft_strchr(" ;|<>&\0", ln[0][*ps]) || ln[0][*ps - 1] == '\\')
-		ft_move_right(ps, *ln);
+		ft_move_left(ps, ln);
+	while (!ft_strchr(" ;|<>&\0", ln[*ps]) || ln[*ps - 1] == '\\')
+		ft_move_right(ps, ln);
 }
 
-void			ft_comp_path(char **ln, int pv, char *buf)
+void			ft_comp_path(char *ln, int pv, char *buf)
 {
 	int			i[3];
 
@@ -98,7 +96,7 @@ void			ft_comp_path(char **ln, int pv, char *buf)
 	i[2] = 0;
 	while (i[0] < pv)
 	{
-		buf[i[0]] = ln[0][i[1]];
+		buf[i[0]] = ln[i[1]];
 		i[0]++;
 		i[1]++;
 	}
@@ -108,11 +106,11 @@ void			ft_comp_path(char **ln, int pv, char *buf)
 		i[2]++;
 		i[0]++;
 	}
-	while (!ft_strchr(" ;><&|\0", ln[0][i[1]]) || ln[0][i[1] - 1] == '\\')
+	while (!ft_strchr(" ;><&|\0", ln[i[1]]) || ln[i[1] - 1] == '\\')
 		i[1]++;
-	while (ln[0][i[1]])
+	while (ln[i[1]])
 	{
-		buf[i[0]] = ln[0][i[1]];
+		buf[i[0]] = ln[i[1]];
 		i[0]++;
 		i[1]++;
 	}

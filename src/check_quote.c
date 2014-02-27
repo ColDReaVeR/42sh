@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/05 15:38:35 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/24 12:44:07 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/24 19:34:50 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -17,7 +17,7 @@ static void			ft_is_instring(char *quote, char *str);
 static void			ft_del_list(t_quote **alist);
 static void			ft_final_check(t_quote **alist, char quote);
 
-int					ft_check_quote(char **line)
+int					ft_check_quote(char *line)
 {
 	char			quote;
 	char			*str;
@@ -25,9 +25,9 @@ int					ft_check_quote(char **line)
 
 	list = NULL;
 	quote = '\0';
-	if (*line == NULL)
+	if (!*line)
 		return (0);
-	str = *line;
+	str = line;
 	while (*str)
 	{
 		ft_is_instring(&quote, str);

@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/04 10:25:54 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/22 17:19:27 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/23 20:00:54 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -18,7 +18,7 @@ static int		ft_check_redir(t_cmd **alist, char *str, char **ptr);
 static void		ft_add_to_list(t_cmd **alist, char *ptr, int redir);
 static t_cmd	*ft_create_first_node(char *ptr, int redir);
 
-t_cmd			*ft_parser(char **line)
+t_cmd			*ft_parser(char *line)
 {
 	t_cmd		*list;
 	int			instring;
@@ -27,7 +27,7 @@ t_cmd			*ft_parser(char **line)
 
 	list = NULL;
 	instring = 0;
-	str = *line;
+	str = line;
 	ptr = str;
 	while (*str)
 	{
@@ -38,8 +38,6 @@ t_cmd			*ft_parser(char **line)
 			str++;
 	}
 	ft_add_to_list(&list, ptr, 0);
-	free(*line);
-	*line = NULL;
 	return (list);
 }
 

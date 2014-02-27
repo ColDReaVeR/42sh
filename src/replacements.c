@@ -6,27 +6,27 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/11 22:30:21 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/21 16:18:15 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/23 20:16:52 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
 #include "libft.h"
 #include "42sh.h"
 
-void			ft_do_replacements(char **line)
+void			ft_do_replacements(char *line)
 {
 	ft_replace_alias(line);
-	if (ft_strchr(*line, '~'))
+	if (ft_strchr(line, '~'))
 		ft_replace_tilde(line);
-	if (ft_strchr(*line, '$'))
+	if (ft_strchr(line, '$'))
 		ft_replace_variable(line);
-	if (ft_strchr(*line, '*'))
+	if (ft_strchr(line, '*'))
 		ft_replace_star(line);
-	if (ft_strstr(*line, ".sh"))
+	if (ft_strstr(line, ".sh"))
 		ft_replace_script(line, 0, 0);
 }
 
-int				ft_check_is_cmd(char **line, char *buf, int i, int *j)
+int				ft_check_is_cmd(char *line, char *buf, int i, int *j)
 {
 	int			cmd;
 	int			k;
@@ -34,17 +34,17 @@ int				ft_check_is_cmd(char **line, char *buf, int i, int *j)
 	cmd = 0;
 	k = i;
 	k--;
-	while (k >= 0 && !ft_strchr(";><&|", line[0][k]))
+	while (k >= 0 && !ft_strchr(";><&|", line[k]))
 	{
-		if (line[0][k] != ' ')
+		if (line[k] != ' ')
 			cmd = 1;
 		k--;
 	}
 	if (cmd)
 	{
-		while (!ft_strchr(" <>&|;\0", line[0][i]))
+		while (!ft_strchr(" <>&|;\0", line[i]))
 		{
-			buf[*j] = line[0][i];
+			buf[*j] = line[i];
 			i++;
 			(*j)++;
 		}
