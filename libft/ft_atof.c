@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/11 10:33:11 by hestela           #+#    #+#             */
-/*   Updated: 2013/12/11 10:36:41 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/27 14:42:09 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@ static double		ft_convert_rest(const char *str);
 
 double				ft_atof(const char *str)
 {
-	double		result;
-	double		rest;
-	int			sign;
+	double			result;
+	double			rest;
+	int				sign;
 
 	if (!str || !*str)
 		return (0);
@@ -41,9 +41,9 @@ double				ft_atof(const char *str)
 
 static double		ft_convert_rest(const char *str)
 {
-	double		rest;
-	int			i;
-	int			after;
+	double			rest;
+	int				i;
+	int				after;
 
 	rest = 0;
 	i = 0;

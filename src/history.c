@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 17:16:03 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/24 19:51:27 by msommagg         ###   ########.fr       */
+/*   Updated: 2014/02/27 15:46:06 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -43,6 +43,8 @@ void			ft_next_cmd(int *position, char *line, char *buf)
 		ft_move_left(position, line);
 	tputs(tgetstr("cd", NULL), 1, ft_putchar);
 	g_env.histo = g_env.histo->next;
+	if (!g_env.histo->next)
+		g_env.in_histo = 0;
 	if (g_env.histo->line)
 		ft_strcpy(line, g_env.histo->line);
 	else

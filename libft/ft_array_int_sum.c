@@ -6,12 +6,12 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/27 14:51:01 by hestela           #+#    #+#             */
-/*   Updated: 2013/11/27 15:18:54 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/27 15:06:26 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <string.h>
 
-double		ft_array_int_sum(int *array, size_t size)
+double				ft_array_int_sum(int *array, size_t size)
 {
 	double			result;
 	unsigned int	i;

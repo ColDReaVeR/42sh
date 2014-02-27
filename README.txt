@@ -1,7 +1,7 @@
         =================================================================
        
                                PROJECT COMPLETE
-                    (MAC OSX ONLY... WAIT FOR LINUX VERSION)
+
         =================================================================
 
                         LEAD DEVELOPER : ESTELA Hadrien
@@ -44,6 +44,7 @@ unsetenv | unset  >  unset environement variable
             jobs  >  show list of suspended jobs
          history  >  print history list
             echo  >  write in stdout
+           alias  >  show alias list or add new alias.
 
 signals:
 

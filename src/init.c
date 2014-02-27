@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/11 00:09:56 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/25 01:14:04 by msommagg         ###   ########.fr       */
+/*   Updated: 2014/02/27 15:45:45 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <sys/ioctl.h>
@@ -83,7 +83,6 @@ static void		ft_get_alias_list(void)
 	tmp = ft_strjoin(ft_getenv(g_env.env, "HOME"), "/");
 	path = ft_strjoin(tmp, ".bashrc");
 	fd = open(path, O_RDONLY);
-	free(path);
 	free(tmp);
 	tmp = NULL;
 	while (ft_gnl(fd, &tmp) > 0)
@@ -96,6 +95,7 @@ static void		ft_get_alias_list(void)
 	}
 	if (g_env.alias_lst)
 		g_env.alias_lst = g_env.alias_lst->start;
+	free(path);
 	free(tmp);
 }
 

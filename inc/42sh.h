@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 15:39:58 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/25 01:57:40 by msommagg         ###   ########.fr       */
+/*   Updated: 2014/02/27 15:49:10 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ typedef struct				s_comp_lst
 	struct s_comp_lst		*start;
 }							t_comp_lst;
 
-extern char					**environ;
 t_env						g_env;
 t_win						g_ws;
 int							g_prompt_len;
@@ -247,16 +246,22 @@ void		ft_replace_script(char *line, int i, int j);
 int			ft_check_is_cmd(char *line, char *buf, int i, int *j);
 void		ft_in_string(char *quote, char c, int d);
 
+
+/*
+** Signals
+*/
+
+void		ft_resize(int sig);
+void		ft_kill(int sig);
+
 /*
 ** Others
 */
 
 void		ft_check_env(void);
-void		ft_init();
+void		ft_init(void);
 void		ft_exec(char **av, char **env);
 char		*ft_check_exist(char *cmd);
-void		ft_resize(int sig);
-void		ft_kill(int sig);
 int			ft_check_quote(char *line);
 void		ft_add_quote_to_list(t_quote **alist, char c);
 int			ft_is_empty(char *s);
