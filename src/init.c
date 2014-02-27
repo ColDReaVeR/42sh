@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/11 00:09:56 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/27 12:44:27 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/27 14:08:41 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <sys/ioctl.h>
@@ -91,6 +91,7 @@ static void		ft_get_alias_list(void)
 	}
 	if (g_env.alias_lst)
 		g_env.alias_lst = g_env.alias_lst->start;
+	free(path);
 }
 
 static void		ft_add_node(char *str)
