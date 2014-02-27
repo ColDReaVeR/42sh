@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/02 15:21:32 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/05 14:14:23 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/27 02:06:32 by msommagg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -52,8 +52,7 @@ static char		**ft_get_rest(int fd, char **tmp)
 		if (my_struct.rest[fd])
 		{
 			free(*tmp);
-			*tmp = ft_strdup(my_struct.rest[fd]);
-			free(my_struct.rest[fd]);
+			*tmp = my_struct.rest[fd];
 			my_struct.rest[fd] = NULL;
 		}
 	}
@@ -63,8 +62,7 @@ static char		**ft_get_rest(int fd, char **tmp)
 		if (my_struct.rest[fd])
 		{
 			free(*tmp);
-			*tmp = ft_strdup(my_struct.rest[fd]);
-			free(my_struct.rest[fd]);
+			*tmp = my_struct.rest[fd];
 			my_struct.rest[fd] = NULL;
 		}
 	}
@@ -85,6 +83,7 @@ static int		ft_read(char **tmp, int fd)
 		ret = read(fd, buf, BUFF_SIZE);
 		buf[ret] = '\0';
 		join = ft_strjoin(*tmp, buf);
+		free(*tmp);
 		*tmp = ft_strdup(join);
 		free(join);
 	}
